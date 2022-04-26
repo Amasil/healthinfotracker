@@ -55,14 +55,13 @@ public class Writer {
      * Writes the user information to a file
      *
      * @param fileSave   The name of the file to write to
-     * @param userNumber The key to the information of the user in the hashmap
      * @param userName   The name of the user that is manually entered if the user doesn't exist
      * @param userAge    The age of the user that is manually entered if the user doesn't exist
      * @param userGender The gender of the user that is manually entered if the user doesn't exist
      * @param userWeight The weight of the user that is manually entered if the user doesn't exist
      * @param userHeight The height of the user that is manually entered if the user doesn't exist
      */
-    public static void fileWriter(File fileSave, int userNumber, String userName, String userAge, String userGender, String userWeight, String userHeight) throws IOException {
+    public static void fileWriter(File fileSave, String userName, String userAge, String userGender, String userWeight, String userHeight) throws IOException {
 
         fileSave.createNewFile();
 
@@ -74,7 +73,7 @@ public class Writer {
                 BufferedWriter b_writer = new BufferedWriter(f_writer);
 
                 //Getting the user info from the hashmap
-                b_writer.write(userNumber + "," + userName + "," + userAge + "," + userGender + "," + userWeight + "," + userHeight + "\n");
+                b_writer.write(userName + "," + userAge + "," + userGender + "," + userWeight + "," + userHeight + "\n");
                 b_writer.flush();
                 b_writer.close();
                 //Exception handled

@@ -10,10 +10,9 @@
 package mvh;
 
 
-import mvh.app.MainController;
 import mvh.user.User;
-import mvh.util.Reader;
 import mvh.util.Calculations;
+import mvh.util.Reader;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -21,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class UserTest {
@@ -725,138 +724,138 @@ class UserTest {
         assertEquals(expResult, actResult);
     }
 
-    /**
-     * Tests the reader function
-     */
-
-    @Test
-    void readerTest1() throws IOException {
-        //Clearing the userInfo before starting the test
-        MainController.userInfo.clear();
-        //Opening the reader with the test file passed in and the hashmap with the userInfo
-        File outFile = new File("InputInfo.txt");
-        Reader.reader(outFile);
-        HashMap<Integer, Object> expected = new HashMap<>();
-        HashMap<Integer, Object> actResult = MainController.userInfo;
-
-        //Setting the variables for creating the string output
-        String name = "Subha";
-        String gender = "Female";
-        double age = 19;
-        double weight = 45;
-        double height = 156;
-        int userNumber1 = 1;
-
-        //Creating a new user
-        User user = new User(name, gender, age, weight, height);
-        //Adding the userNumber and the user to the hashmap
-        expected.put(userNumber1, user);
-
-        //Setting the variables for creating the string output
-        String name2 = "Amasil";
-        String gender2 = "Male";
-        double age2 = 21;
-        double weight2 = 70;
-        double height2 = 183;
-        int userNumber2 = 2;
-
-        //Creating a new user
-        User user2 = new User(name2, gender2, age2, weight2, height2);
-        //Adding the userNumber and the user to the hashmap
-        expected.put(userNumber2, user2);
-
-
-        //Setting the variables for creating the string output
-        String name3 = "Harry";
-        String gender3 = "Preferred not to say";
-        double age3 = 40;
-        double weight3 = 38;
-        double height3 = 160;
-        int userNumber3 = 3;
-
-        //Creating a new user
-        User user3 = new User(name3, gender3, age3, weight3, height3);
-        //Adding the userNumber and the user to the hashmap
-        expected.put(userNumber3, user3);
-
-        //Checking if the user is being created correctly
-        assertEquals(expected.toString(), actResult.toString());
-    }
-
-    /**
-     * Tests the reader function
-     */
-    @Test
-    void readerTest2() throws IOException {
-        //Clearing the userInfo before starting the test
-        MainController.userInfo.clear();
-        //Opening the reader with the test file passed in and the hashmap with the userInfo
-        File outFile = new File("WrongInputTest.txt");
-        Reader.reader(outFile);
-        HashMap<Integer, Object> expected = new HashMap<>();
-        HashMap<Integer, Object> actResult = MainController.userInfo;
-        //Setting the variables for creating the string output
-        //Checking if the user is being created correctly
-        assertEquals(expected.toString(), actResult.toString());
-    }
-
-    /**
-     * Tests the reader function
-     */
-    @Test
-    void readerTest3() throws IOException {
-        //Clearing the userInfo before starting the test
-        MainController.userInfo.clear();
-        //Opening the reader with the test file passed in and the hashmap with the userInfo
-        File outFile = new File("SemiCorrect.txt");
-        Reader.reader(outFile);
-        HashMap<Integer, Object> expected = new HashMap<>();
-        HashMap<Integer, Object> actResult = MainController.userInfo;
-
-        //Setting the variables for creating the string output
-        String name = "Amasil";
-        String gender = "Male";
-        double age = 21;
-        double weight = 70;
-        double height = 183;
-        int userNUmber1 = 1;
-
-        //Creating a new user
-        User user = new User(name, gender, age, weight, height);
-        //Adding the userNumber and the user to the hashmap
-        expected.put(userNUmber1, user);
-
-        //Setting the variables for creating the string output
-        String name2 = "Subha";
-        String gender2 = "Female";
-        double age2 = 19;
-        double weight2 = 45;
-        double height2 = 156;
-        int userNumber2 = 2;
-
-        //Creating a new user
-        User user2 = new User(name2, gender2, age2, weight2, height2);
-        //Adding the userNumber and the user to the hashmap
-        expected.put(userNumber2, user2);
-
-
-        //Setting the variables for creating the string output
-        String name3 = "Harry";
-        String gender3 = "Preferred not to say";
-        double age3 = 40;
-        double height3 = 20;
-        double weight3 = 20;
-        int userNumber3 = 4;
-
-        //Creating a new user
-        User user3 = new User(name3, gender3, age3, weight3, height3);
-        //Adding the userNumber and the user to the hashmap
-        expected.put(userNumber3, user3);
-
-
-        System.out.println("\n" + "This test was designed for semi completed file, check the test result");
-        //Setting the variables for creating the string output
-        //Checking if the user is being created correctly
-        assertEquals(expected.toString(), actResult.toString());
-    }
+//    /**
+//     * Tests the reader function
+//     */
+//
+//    @Test
+//    void readerTest1() throws IOException {
+//        //Clearing the userInfo before starting the test
+//        MainController.userInfo.clear();
+//        //Opening the reader with the test file passed in and the hashmap with the userInfo
+//        File outFile = new File("InputInfo.txt");
+//        Reader.reader(outFile);
+//        HashMap<Integer, Object> expected = new HashMap<>();
+//        HashMap<Integer, Object> actResult = MainController.userInfo;
+//
+//        //Setting the variables for creating the string output
+//        String name = "Subha";
+//        String gender = "Female";
+//        double age = 19;
+//        double weight = 45;
+//        double height = 156;
+//        int userNumber1 = 1;
+//
+//        //Creating a new user
+//        User user = new User(name, gender, age, weight, height);
+//        //Adding the userNumber and the user to the hashmap
+//        expected.put(userNumber1, user);
+//
+//        //Setting the variables for creating the string output
+//        String name2 = "Amasil";
+//        String gender2 = "Male";
+//        double age2 = 21;
+//        double weight2 = 70;
+//        double height2 = 183;
+//        int userNumber2 = 2;
+//
+//        //Creating a new user
+//        User user2 = new User(name2, gender2, age2, weight2, height2);
+//        //Adding the userNumber and the user to the hashmap
+//        expected.put(userNumber2, user2);
+//
+//
+//        //Setting the variables for creating the string output
+//        String name3 = "Harry";
+//        String gender3 = "Preferred not to say";
+//        double age3 = 40;
+//        double weight3 = 38;
+//        double height3 = 160;
+//        int userNumber3 = 3;
+//
+//        //Creating a new user
+//        User user3 = new User(name3, gender3, age3, weight3, height3);
+//        //Adding the userNumber and the user to the hashmap
+//        expected.put(userNumber3, user3);
+//
+//        //Checking if the user is being created correctly
+//        assertEquals(expected.toString(), actResult.toString());
+//    }
+//
+//    /**
+//     * Tests the reader function
+//     */
+//    @Test
+//    void readerTest2() throws IOException {
+//        //Clearing the userInfo before starting the test
+//        MainController.userInfo.clear();
+//        //Opening the reader with the test file passed in and the hashmap with the userInfo
+//        File outFile = new File("WrongInputTest.txt");
+//        Reader.reader(outFile);
+//        HashMap<Integer, Object> expected = new HashMap<>();
+//        HashMap<Integer, Object> actResult = MainController.userInfo;
+//        //Setting the variables for creating the string output
+//        //Checking if the user is being created correctly
+//        assertEquals(expected.toString(), actResult.toString());
+//    }
+//
+//    /**
+//     * Tests the reader function
+//     */
+//    @Test
+//    void readerTest3() throws IOException {
+//        //Clearing the userInfo before starting the test
+//        MainController.userInfo.clear();
+//        //Opening the reader with the test file passed in and the hashmap with the userInfo
+//        File outFile = new File("SemiCorrect.txt");
+//        Reader.reader(outFile);
+//        HashMap<Integer, Object> expected = new HashMap<>();
+//        HashMap<Integer, Object> actResult = MainController.userInfo;
+//
+//        //Setting the variables for creating the string output
+//        String name = "Amasil";
+//        String gender = "Male";
+//        double age = 21;
+//        double weight = 70;
+//        double height = 183;
+//        int userNUmber1 = 1;
+//
+//        //Creating a new user
+//        User user = new User(name, gender, age, weight, height);
+//        //Adding the userNumber and the user to the hashmap
+//        expected.put(userNUmber1, user);
+//
+//        //Setting the variables for creating the string output
+//        String name2 = "Subha";
+//        String gender2 = "Female";
+//        double age2 = 19;
+//        double weight2 = 45;
+//        double height2 = 156;
+//        int userNumber2 = 2;
+//
+//        //Creating a new user
+//        User user2 = new User(name2, gender2, age2, weight2, height2);
+//        //Adding the userNumber and the user to the hashmap
+//        expected.put(userNumber2, user2);
+//
+//
+//        //Setting the variables for creating the string output
+//        String name3 = "Harry";
+//        String gender3 = "Preferred not to say";
+//        double age3 = 40;
+//        double height3 = 20;
+//        double weight3 = 20;
+//        int userNumber3 = 4;
+//
+//        //Creating a new user
+//        User user3 = new User(name3, gender3, age3, weight3, height3);
+//        //Adding the userNumber and the user to the hashmap
+//        expected.put(userNumber3, user3);
+//
+//
+//        System.out.println("\n" + "This test was designed for semi completed file, check the test result");
+//        //Setting the variables for creating the string output
+//        //Checking if the user is being created correctly
+//        assertEquals(expected.toString(), actResult.toString());
+//    }
 }

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -47,20 +48,18 @@
                                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                             </textFill>
                         </Label>
-                        <Label layoutX="10.0" layoutY="55.0" text="User No." />
-                        <Label layoutX="10.0" layoutY="85.0" text="Name" />
-                        <Label layoutX="10.0" layoutY="115.0" text="Age" />
-                        <TextField fx:id="userName" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" />
-                        <TextField fx:id="userAge" layoutX="65.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" />
-                        <Label layoutX="10.0" layoutY="145.0" text="Gender" />
-                        <Label layoutX="10.0" layoutY="175.0" text="Weight" />
-                        <TextField fx:id="userWeight" layoutX="65.0" layoutY="170.0" prefHeight="25.0" prefWidth="70.0" />
-                        <TextField fx:id="userHeight" layoutX="65.0" layoutY="200.0" prefHeight="25.0" prefWidth="70.0" />
-                        <Label layoutX="10.0" layoutY="205.0" text="Height" />
-                        <Button layoutX="15.0" layoutY="239.0" mnemonicParsing="false" onAction="#createUser" prefWidth="70.0" text="Add User" />
-                        <ChoiceBox fx:id="userGender" layoutX="65.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" />
-                  <Button layoutX="88.0" layoutY="239.0" mnemonicParsing="false" onMouseClicked="#changeUser" text="Change Information" />
-                  <ChoiceBox fx:id="userNumber" layoutX="65.0" layoutY="50.0" prefHeight="25.0" prefWidth="150.0" />
+                        <Label layoutX="10.0" layoutY="55.0" text="Name" />
+                        <Label layoutX="10.0" layoutY="85.0" text="Age" />
+                        <TextField fx:id="userName" layoutX="65.0" layoutY="50.0" prefHeight="25.0" prefWidth="150.0" />
+                        <TextField fx:id="userAge" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" />
+                        <Label layoutX="10.0" layoutY="115.0" text="Gender" />
+                        <Label layoutX="10.0" layoutY="145.0" text="Weight" />
+                        <TextField fx:id="userWeight" layoutX="65.0" layoutY="140.0" prefHeight="25.0" prefWidth="70.0" />
+                        <TextField fx:id="userHeight" layoutX="65.0" layoutY="170.0" prefHeight="25.0" prefWidth="70.0" />
+                        <Label layoutX="10.0" layoutY="175.0" text="Height" />
+                        <Button layoutX="15.0" layoutY="210.0" mnemonicParsing="false" onAction="#createUser" prefWidth="70.0" text="Add User" />
+                        <ChoiceBox fx:id="userGender" layoutX="65.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" />
+                  <Button layoutX="88.0" layoutY="210.0" mnemonicParsing="false" onMouseClicked="#changeUser" text="Change Information" />
                   <Label layoutX="10.0" layoutY="410.0" text="Calorie" textFill="#9f9f9f">
                      <font>
                         <Font size="18.0" />
@@ -71,8 +70,10 @@
                   <Label layoutX="11.0" layoutY="485.0" text="Amount" />
                   <ChoiceBox fx:id="calorieUser" layoutX="65.0" layoutY="450.0" prefWidth="150.0" />
                   <TextField fx:id="calorieAmount" layoutX="65.0" layoutY="480.0" prefWidth="150.0" />
-                  <ChoiceBox fx:id="weightChoice" layoutX="145.0" layoutY="170.0" prefWidth="70.0" />
-                  <ChoiceBox fx:id="heightChoice" layoutX="145.0" layoutY="200.0" prefWidth="70.0" />
+                  <ChoiceBox fx:id="weightChoice" layoutX="145.0" layoutY="140.0" prefWidth="70.0" />
+                  <ChoiceBox fx:id="heightChoice" layoutX="145.0" layoutY="170.0" prefWidth="70.0" />
+                  <DatePicker fx:id="newDatePicker" layoutX="15.0" layoutY="274.0" />
+                  <Button layoutX="73.0" layoutY="312.0" mnemonicParsing="false" onAction="#button" text="Button" />
                     </children>
                 </AnchorPane>
             <AnchorPane maxWidth="-Infinity" prefWidth="300.0">
@@ -82,7 +83,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="55.0" text="User No." />
+                  <Label layoutX="10.0" layoutY="55.0" text="User Name" />
                   <ChoiceBox fx:id="viewUserNumber" layoutX="110.0" layoutY="50.0" prefWidth="150.0" />
                   <Button layoutX="110.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#viewBMI" text="View" />
                   <ChoiceBox fx:id="viewInfoType" layoutX="110.0" layoutY="160.0" prefWidth="150.0" />

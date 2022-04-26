@@ -1,4 +1,4 @@
-1,Amasil,21,M,70,183
-2,Subha,19,F,45,156
-3,Minhaz,-1,M,60,170
-4,Harry,40,N,20,20
+Amasil,21,M,70,183
+Subha,19,F,45,156
+Minhaz,-1,M,60,170
+Harry,40,N,20,20

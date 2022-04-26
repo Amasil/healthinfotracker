@@ -1,10 +1,10 @@
-0,Amasil,21,M,70,183
-2,Subha,P,M,50.0,160.0
-3,Minhaz,-1,M,60.0,170.0
-4,Raisa,0,M,55.0,155.0
-5,Fabiha,21.0,Q,45.0,140.0
-6,Animesh,21.0,M,P,140.0
-7,Reeves,21.0,F,-6,100.0
-8,Robot Baby,1.0,F,0,10.0
-9,Linux,1.0,N,1.0,P
-10,Ron,21.0,M,21.0,-1
+Amasil,21,M,70,183
+Subha,P,M,50.0,160.0
+Minhaz,-1,M,60.0,170.0
+Raisa,0,M,55.0,155.0
+Fabiha,21.0,Q,45.0,140.0
+Animesh,21.0,M,P,140.0
+Reeves,21.0,F,-6,100.0
+Robot Baby,1.0,F,0,10.0
+Linux,1.0,N,1.0,P
+Ron,21.0,M,21.0,-1

@@ -10,7 +10,7 @@
 package mvh.util;
 
 import mvh.app.MainController;
-import mvh.user.*;
+import mvh.user.User;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,12 +21,11 @@ import java.util.HashMap;
 
 public class Reader {
     //We know that the information will always be in this order.
-    static final int USER_NUMBER = 0;
-    static final int USER_NAME = 1;
-    static final int USER_GEN = 3;
-    static final int USER_AGE = 2;
-    static final int USER_WEIGHT = 4;
-    static final int USER_HEIGHT = 5;
+    static final int USER_NAME = 0;
+    static final int USER_AGE = 1;
+    static final int USER_GEN = 2;
+    static final int USER_WEIGHT = 3;
+    static final int USER_HEIGHT = 4;
 
     /**
      * Reads information from a file
@@ -39,7 +38,6 @@ public class Reader {
         BufferedReader b_reader = new BufferedReader(file_reader);
 
         //Setting the variables
-        int userNumber;
         String userName;
         String userGender;
         double userAge;
@@ -60,78 +58,67 @@ public class Reader {
                         //Checking the gender of the user to assign the information accordingly
                         //Assigning the information of the file to variables
                         try {
-                            userNumber = Integer.parseInt(userInfo[USER_NUMBER]);
-                            try {
-                                //Since the program works for 10 user the userNumber will need to be between 1 and 10
-                                if (userNumber < 1 || userNumber > 10) {
-                                    System.err.println("The User Number is less than 1 or greater than 10");
-                                } else {
-                                    userName = userInfo[USER_NAME];
-                                    try {
-                                        userGender = userInfo[USER_GEN];
-                                        //User Gender can only be M or N or F
-                                        if (!userGender.equals("M") && !userGender.equals("N") && !userGender.equals("F")) {
-                                            System.err.println("There is a problem with assigning " + userName + "’s gender.");
-                                        } else {
-                                            //Abbreviating the M, N and F.
-                                            if (userInfo[USER_GEN].equals("M")) {
-                                                userGender = "Male";
-                                            }
-                                            if (userInfo[USER_GEN].equals("F")) {
-                                                userGender = "Female";
-                                            }
-                                            if (userInfo[USER_GEN].equals("N")) {
-                                                userGender = "Preferred not to say";
-                                            }
-                                            try {
-                                                userAge = Double.parseDouble(userInfo[USER_AGE]);
-                                                //Age has to be a positive number
-                                                if (userAge <= 0) {
-                                                    System.err.println(userName + "’s age is 0 or a negative number");
-                                                } else {
-                                                    try {
-                                                        //Weight has to be a positive number
-                                                        userWeight = Double.parseDouble(userInfo[USER_WEIGHT]);
-                                                        if (userWeight <= 0) {
-                                                            System.err.println(userName + "’s weight is 0 or a negative number");
-                                                        } else {
-                                                            try {
-                                                                //Height has to be a positive number
-                                                                userHeight = Double.parseDouble(userInfo[USER_HEIGHT]);
-                                                                if (userHeight <= 0) {
-                                                                    System.err.println(userName + "’s height is 0 or a negative number");
-                                                                } else {
-                                                                    //Creating a user using all the user information
-                                                                    user = new User(userName, userGender, userAge, userWeight, userHeight);
-                                                                    MainController.userInfo.put(userNumber, user);
-                                                                }
+                            userName = userInfo[USER_NAME];
+                            if (MainController.userInfo.containsKey(userName)) {
+                                System.err.println("The user " + userName + " already exists");
+                            } else {
+                                try {
+                                    userGender = userInfo[USER_GEN];
+                                    //User Gender can only be M or N or F
+                                    if (!userGender.equals("M") && !userGender.equals("N") && !userGender.equals("F")) {
+                                        System.err.println("There is a problem with assigning " + userName + "’s gender.");
+                                    } else {
+                                        //Abbreviating the M, N and F.
+                                        if (userInfo[USER_GEN].equals("M")) {
+                                            userGender = "Male";
+                                        }
+                                        if (userInfo[USER_GEN].equals("F")) {
+                                            userGender = "Female";
+                                        }
+                                        if (userInfo[USER_GEN].equals("N")) {
+                                            userGender = "Preferred not to say";
+                                        }
+                                        try {
+                                            userAge = Double.parseDouble(userInfo[USER_AGE]);
+                                            //Age has to be a positive number
+                                            if (userAge <= 0) {
+                                                System.err.println(userName + "’s age is 0 or a negative number");
+                                            } else {
+                                                try {
+                                                    //Weight has to be a positive number
+                                                    userWeight = Double.parseDouble(userInfo[USER_WEIGHT]);
+                                                    if (userWeight <= 0) {
+                                                        System.err.println(userName + "’s weight is 0 or a negative number");
+                                                    } else {
+                                                        try {
+                                                            //Height has to be a positive number
+                                                            userHeight = Double.parseDouble(userInfo[USER_HEIGHT]);
+                                                            if (userHeight <= 0) {
+                                                                System.err.println(userName + "’s height is 0 or a negative number");
+                                                            } else {
+                                                                //Creating a user using all the user information
+                                                                user = new User(userName, userGender, userAge, userWeight, userHeight);
+                                                                MainController.userInfo.put(userName, user);
+                                                                MainController.items.add(userName);
                                                             }
-                                                            catch (Exception e) {
-                                                                System.err.println("There was a problem parsing the Height of " + userName);
-                                                            }
+                                                        } catch (Exception e) {
+                                                            System.err.println("There was a problem parsing the Height of " + userName);
                                                         }
                                                     }
-                                                    catch (Exception e) {
-                                                        System.err.println("There was a problem parsing the weight of " + userName);
-                                                    }
+                                                } catch (Exception e) {
+                                                    System.err.println("There was a problem parsing the weight of " + userName);
                                                 }
                                             }
-                                            catch (Exception e) {
-                                                System.err.println("There was a problem parsing the age of " + userName);
-                                            }
+                                        } catch (Exception e) {
+                                            System.err.println("There was a problem parsing the age of " + userName);
                                         }
                                     }
-                                    catch (Exception e) {
-                                        System.err.println("There was a problem assigning the gender of " + userName);
-                                    }
+                                } catch (Exception e) {
+                                    System.err.println("There was a problem assigning the gender of " + userName);
                                 }
                             }
-                            catch (Exception e) {
-                                System.err.println("There is an Issue with the user number");
-                            }
-                        }
-                        catch (Exception e) {
-                            System.err.println("There is a problem with the user number.");
+                        } catch (Exception e) {
+                            System.err.println("Hello");
                         }
                         //Read the next line
                         line = b_reader.readLine();
