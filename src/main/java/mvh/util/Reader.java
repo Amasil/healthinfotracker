@@ -3,7 +3,7 @@
  * *Members:
  * Fabiha Fairuzz Subha (UCID: 30148674)
  * Amasil Rahim Zihad (UCID: 30164830)
- * Date: March 2nd, 2022- April 15, 2022
+ * Date: March 2nd, 2022- April 15, 2022,
  * Tutorial 05 and Tutorial 10.
  * Project Final Submission
  */
@@ -99,7 +99,7 @@ public class Reader {
                                                                 //Creating a user using all the user information
                                                                 user = new User(userName, userGender, userAge, userWeight, userHeight);
                                                                 MainController.userInfo.put(userName, user);
-                                                                MainController.items.add(userName);
+                                                                MainController.users.add(userName);
                                                             }
                                                         } catch (Exception e) {
                                                             System.err.println("There was a problem parsing the Height of " + userName);

@@ -3,7 +3,7 @@
  * *Members:
  * Fabiha Fairuzz Subha (UCID: 30148674)
  * Amasil Rahim Zihad (UCID: 30164830)
- * Date: March 2nd, 2022- April 15, 2022
+ * Date: March 2nd, 2022- April 15, 2022,
  * Tutorial 05 and Tutorial 10.
  * Project Final Submission
  */
@@ -31,6 +31,8 @@ public class MainController {
     private User user;
     //A hashmap to organize the data
     public static HashMap<String, Object> userInfo = new HashMap<>();
+    //An observable list is set up here which will display all users.
+    public static ObservableList<String> users = FXCollections.observableArrayList();
     //Constant to Convert Pound to kg.
     final double lbToKg = 0.4536;
     @FXML
@@ -76,8 +78,6 @@ public class MainController {
     @FXML
     private TextArea viewDetails;
     @FXML
-    private int userNumberInt;
-    @FXML
     private DatePicker newDatePicker;
     @FXML
     private String name;
@@ -91,7 +91,6 @@ public class MainController {
     private double height;
     @FXML
     private int age;
-    public static ObservableList<String> items = FXCollections.observableArrayList();
 
 
     /**
@@ -146,7 +145,7 @@ public class MainController {
         //View Info user number
         viewUserNumber.getItems().clear();
         viewUserNumber.setValue("None");
-        viewUserNumber.setItems(items);
+        viewUserNumber.setItems(users);
 
         //BMI View
         viewInfoType.getItems().clear();
@@ -273,7 +272,7 @@ public class MainController {
                                                     extractedSuccess();
                                                     viewDetails.setText("");
                                                     //Adding the username to the choiceBox so that it can be viewed
-                                                    items.add(name);
+                                                    users.add(name);
                                                     viewUserNumber.setValue("Select");
                                                 } catch (Exception e) {
                                                     extracted("Couldn't add user");
@@ -367,7 +366,7 @@ public class MainController {
                                                     rightStatus.setText("User Didn't Exist so Added User! Choose from menu");
                                                     extractedSuccess();
                                                     viewDetails.setText("");
-                                                    items.add(name);
+                                                    users.add(name);
                                                     viewUserNumber.setValue("Select");
                                                 } catch (Exception e) {
                                                     extracted("Couldn't add user");
@@ -440,7 +439,7 @@ public class MainController {
                                                 rightStatus.setText("Changed Information! Choose from menu");
                                                 extractedSuccess();
                                                 viewDetails.setText("");
-                                                items.add(name);
+                                                users.add(name);
                                                 viewUserNumber.setValue("Select");
                                             } catch (Exception e) {
                                                 extracted("Couldn't change user Information");
@@ -473,9 +472,13 @@ public class MainController {
         try {
             //Getting the user number
             name = viewUserNumber.getValue();
-            viewDetails.setText(userInfo.get(name).toString());
-            rightStatus.setText("User Info Printed! View above");
-            extractedSuccess();
+            if (name.equals("Select")) {
+                extracted("Please Select an user");
+            } else {
+                viewDetails.setText(userInfo.get(name).toString());
+                rightStatus.setText("User Info Printed! View above");
+                extractedSuccess();
+            }
             //Exception handled
         } catch (Exception e) {
             extracted("No user Information found! Add user or Load From File");
@@ -682,7 +685,7 @@ public class MainController {
 //            } else {
 //                if (keyCheck) {
 //                    try {
-//                        //Calling the max calories method to get the output
+//                        //Calling the max calories' method to get the output
 //                        File outFile = new File("User.txt");
 //                        HashMap<Integer, ArrayList<Integer>> calorieInfo = Reader.outReader(userNumberInt, outFile);
 //                        int maxCalories = Calculations.getMaxCalories(userNumberInt, calorieInfo);
