@@ -142,16 +142,16 @@ public class Calculations {
      * @param calInfo The arraylist containing the data read from the saved file
      * @return Number of total calories burnt
      */
-    public static int getTotalCalories(int keyNumber, HashMap<Integer, ArrayList<Integer>> calInfo) {
+    public static int getTotalCalories(String inputName, HashMap<String, ArrayList<Integer>> calInfo) {
 
         int sum = 0;
         //Initialising an arraylist
         ArrayList<Integer> calories;
-        boolean keyCheck = calInfo.containsKey(keyNumber);
+        boolean keyCheck = calInfo.containsKey(inputName);
         if (keyCheck) {
             try {
                 //Getting the information of the user using the key of the hashmap
-                calories = calInfo.get(keyNumber);
+                calories = calInfo.get(inputName);
 
                 //Looping through the arraylist assigned to the user key of the hashmap
                 for (int i : calories) {
@@ -171,15 +171,15 @@ public class Calculations {
      *
      * @param calInfo The arraylist containing the data read from the saved file
      */
-    public static int getMaxCalories(int keyNumber, HashMap<Integer, ArrayList<Integer>> calInfo) {
+    public static int getMaxCalories(String inputName, HashMap<String, ArrayList<Integer>> calInfo) {
 
         ArrayList<Integer> calories = null;
-        boolean keyCheck = calInfo.containsKey(keyNumber);
+        boolean keyCheck = calInfo.containsKey(inputName);
         //Loop through the arrayList and add information
         if (keyCheck) {
             try {
                 //Getting the information of the user using the key of the hashmap
-                calories = calInfo.get(keyNumber);
+                calories = calInfo.get(inputName);
 
                 //Exception handled
             } catch (NumberFormatException nfe) {

@@ -135,10 +135,10 @@ public class Reader {
      *
      * @return An array list containing the user input data about calories burnt
      */
-    public static HashMap<Integer, ArrayList<Integer>> outReader(int userNumber, File outFile) throws IOException {
+    public static HashMap<String, ArrayList<Integer>> outReader(String inputName, File outFile) throws IOException {
         //The file that stores the information of calories burnt.
         //Initializing an empty Hashmap and a new Arraylist for storing the data.
-        HashMap<Integer, ArrayList<Integer>> outInfo = null;
+        HashMap<String, ArrayList<Integer>> outInfo = null;
         ArrayList<Integer> list = new ArrayList<>();
         if (outFile.exists()) {
             //Creating a file reader and a buffered reader
@@ -150,13 +150,13 @@ public class Reader {
             while (line != null) {
                 String[] readInfo = line.split(",");
 
-                if (readInfo[0].equals(String.valueOf(userNumber))) {
+                if (readInfo[0].equals(inputName)) {
                     //Adding the calorie information to the arraylist.
                     list.add(Integer.parseInt(readInfo[1]));
                 }
                 line = b_reader.readLine();
                 //Adding the calorie information to the hashmap
-                outInfo.put(userNumber, list);
+                outInfo.put(inputName, list);
             }
         }
         //If file does not exist
