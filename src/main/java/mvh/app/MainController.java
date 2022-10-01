@@ -763,6 +763,7 @@ public class MainController {
                             name = user.getUserName();
                             String age = String.valueOf(user.getUserAge());
                             //Abbreviating the gender to write to a file
+
                             if (user.getUserGender().equals("Male")) {
                                 gender = "M";
                             }
