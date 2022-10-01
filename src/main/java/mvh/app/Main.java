@@ -35,7 +35,7 @@ public class Main extends Application {
                 try {
                     Reader.reader(fileInput);
                     System.out.println("Program Started With File Loaded");
-                //Exception handled
+                    //Exception handled
                 } catch (IOException e) {
                     System.err.println("Not a valid Input file");
                 }

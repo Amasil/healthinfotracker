@@ -610,6 +610,7 @@ public class MainController {
             extractedFail("No user Information found! Add user or Load From File");
         }
     }
+
     /**
      * Allows the user to add calories burnt to a file.
      */

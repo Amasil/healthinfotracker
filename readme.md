@@ -26,11 +26,13 @@
 
 - So if javafx-sdk is in "C:\Program Files\Java\" the cmd command code would be:
 
-- > java --module-path "C:\Program Files\Java\javafx-sdk-18\lib" --add-modules javafx.controls,javafx.fxml -jar CPSC233W22Project.jar
-  
+- > java --module-path "C:\Program Files\Java\javafx-sdk-18\lib" --add-modules javafx.controls,javafx.fxml -jar
+  CPSC233W22Project.jar
+
 - Or on macOS if javafx-sdk is in "/Library/Java/JavaVirtualMachines/" the terminal command would be:
 
-- > java --module-path "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib" --add-modules javafx.controls,javafx.fxml -jar CPSC233W22Project.jar
+- > java --module-path "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib" --add-modules javafx.controls,javafx.fxml
+  -jar CPSC233W22Project.jar
 
 ## Features
 
@@ -50,7 +52,8 @@
 - Running the .jar file like that should run the program and a GUI window titled **This Is A Fitness Tracking Program**
   should appear
 - This is a tracking program that will allow the user to track their weight and calories
-- For further details of the program and its authors, the user can go to the *Help* option in menu bar and look at the *About*
+- For further details of the program and its authors, the user can go to the *Help* option in menu bar and look at the *
+  About*
 - The user can either manually enter their data or can load a file with already entered information of the user.
 - In this program, the user can enter details for up to 10 people and track their data too.
 - The menu portion of the program is in the middle which the user can use to interact and get their desired feedbacks or

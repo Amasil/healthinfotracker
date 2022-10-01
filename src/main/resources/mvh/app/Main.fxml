@@ -1,141 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
-
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvh.app.MainController">
+<?import javafx.scene.text.*?>
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mvh.app.MainController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#loadButton" text="Load" />
-                        <MenuItem mnemonicParsing="false" onAction="#saveButton" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#closeButton" text="Quit" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadButton" text="Load"/>
+                        <MenuItem mnemonicParsing="false" onAction="#saveButton" text="Save"/>
+                        <MenuItem mnemonicParsing="false" onAction="#closeButton" text="Quit"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#viewAbout" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="About"/>
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <SplitPane dividerPositions="0.2505567928730512, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <SplitPane dividerPositions="0.2505567928730512, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0"
+                   VBox.vgrow="ALWAYS">
             <items>
                 <AnchorPane maxWidth="-Infinity" prefWidth="250.0">
                     <children>
-                        <Label alignment="CENTER" layoutY="15.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Input" textAlignment="CENTER" wrapText="false">
+                        <Label alignment="CENTER" layoutY="15.0" minWidth="60.0" prefWidth="-1.0" style="&#10;"
+                               text="Input" textAlignment="CENTER" wrapText="false">
                             <font>
-                                <Font size="18.0" fx:id="x1" />
+                                <Font size="18.0" fx:id="x1"/>
                             </font>
                             <textFill>
-                                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
+                                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2"/>
                             </textFill>
                         </Label>
-                        <Label layoutX="10.0" layoutY="55.0" text="Name" />
-                        <Label layoutX="10.0" layoutY="85.0" text="Age" />
-                        <TextField fx:id="userName" layoutX="65.0" layoutY="50.0" prefHeight="25.0" prefWidth="150.0" />
-                        <TextField fx:id="userAge" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" />
-                        <Label layoutX="10.0" layoutY="115.0" text="Gender" />
-                        <Label layoutX="10.0" layoutY="145.0" text="Weight" />
-                        <TextField fx:id="userWeight" layoutX="65.0" layoutY="140.0" prefHeight="25.0" prefWidth="70.0" />
-                        <TextField fx:id="userHeight" layoutX="65.0" layoutY="170.0" prefHeight="25.0" prefWidth="70.0" />
-                        <Label layoutX="10.0" layoutY="175.0" text="Height" />
-                        <Button layoutX="15.0" layoutY="210.0" mnemonicParsing="false" onAction="#createUser" prefWidth="70.0" text="Add User" />
-                        <ChoiceBox fx:id="userGender" layoutX="65.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" />
-                  <Button layoutX="88.0" layoutY="210.0" mnemonicParsing="false" onAction="#changeUser" text="Change Information" />
-                  <Label layoutX="9.0" layoutY="383.0" text="Calorie" textFill="#9f9f9f">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="455.0" text="User" />
-                  <Button layoutX="65.0" layoutY="510.0" mnemonicParsing="false" onAction="#addCalorieBurnt" prefWidth="150.0" text="Add Daily Calorie Burnt" />
-                  <Label layoutX="11.0" layoutY="485.0" text="Amount" />
-                  <ChoiceBox fx:id="calorieUser" layoutX="65.0" layoutY="450.0" prefWidth="150.0" />
-                  <TextField fx:id="calorieAmount" layoutX="65.0" layoutY="480.0" prefWidth="150.0" />
-                  <ChoiceBox fx:id="weightChoice" layoutX="145.0" layoutY="140.0" prefWidth="70.0" />
-                  <ChoiceBox fx:id="heightChoice" layoutX="145.0" layoutY="170.0" prefWidth="70.0" />
-                  <DatePicker fx:id="inputDatePicker" layoutX="65.0" layoutY="420.0" prefWidth="150.0" />
-                  <Label layoutX="10.0" layoutY="425.0" text="Date" />
+                        <Label layoutX="10.0" layoutY="55.0" text="Name"/>
+                        <Label layoutX="10.0" layoutY="85.0" text="Age"/>
+                        <TextField fx:id="userName" layoutX="65.0" layoutY="50.0" prefHeight="25.0" prefWidth="150.0"/>
+                        <TextField fx:id="userAge" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0"/>
+                        <Label layoutX="10.0" layoutY="115.0" text="Gender"/>
+                        <Label layoutX="10.0" layoutY="145.0" text="Weight"/>
+                        <TextField fx:id="userWeight" layoutX="65.0" layoutY="140.0" prefHeight="25.0"
+                                   prefWidth="70.0"/>
+                        <TextField fx:id="userHeight" layoutX="65.0" layoutY="170.0" prefHeight="25.0"
+                                   prefWidth="70.0"/>
+                        <Label layoutX="10.0" layoutY="175.0" text="Height"/>
+                        <Button layoutX="15.0" layoutY="210.0" mnemonicParsing="false" onAction="#createUser"
+                                prefWidth="70.0" text="Add User"/>
+                        <ChoiceBox fx:id="userGender" layoutX="65.0" layoutY="110.0" prefHeight="25.0"
+                                   prefWidth="150.0"/>
+                        <Button layoutX="88.0" layoutY="210.0" mnemonicParsing="false" onAction="#changeUser"
+                                text="Change Information"/>
+                        <Label layoutX="9.0" layoutY="383.0" text="Calorie" textFill="#9f9f9f">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="455.0" text="User"/>
+                        <Button layoutX="65.0" layoutY="510.0" mnemonicParsing="false" onAction="#addCalorieBurnt"
+                                prefWidth="150.0" text="Add Daily Calorie Burnt"/>
+                        <Label layoutX="11.0" layoutY="485.0" text="Amount"/>
+                        <ChoiceBox fx:id="calorieUser" layoutX="65.0" layoutY="450.0" prefWidth="150.0"/>
+                        <TextField fx:id="calorieAmount" layoutX="65.0" layoutY="480.0" prefWidth="150.0"/>
+                        <ChoiceBox fx:id="weightChoice" layoutX="145.0" layoutY="140.0" prefWidth="70.0"/>
+                        <ChoiceBox fx:id="heightChoice" layoutX="145.0" layoutY="170.0" prefWidth="70.0"/>
+                        <DatePicker fx:id="inputDatePicker" layoutX="65.0" layoutY="420.0" prefWidth="150.0"/>
+                        <Label layoutX="10.0" layoutY="425.0" text="Date"/>
                     </children>
                 </AnchorPane>
-            <AnchorPane maxWidth="-Infinity" prefWidth="300.0">
-               <children>
-                  <Label layoutX="10.0" layoutY="15.0" minWidth="60.0" text="Menu" textFill="#9f9f9f">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="55.0" text="User Name" />
-                  <ChoiceBox fx:id="viewUser" layoutX="110.0" layoutY="50.0" prefWidth="150.0" />
-                  <Button layoutX="110.0" layoutY="190.0" mnemonicParsing="false" onAction="#viewBMI" onMouseClicked="#viewBMI" text="View" />
-                  <ChoiceBox fx:id="viewInfoType" layoutX="110.0" layoutY="160.0" prefWidth="150.0" />
-                  <Label layoutX="10.0" layoutY="164.0" text="Type" />
-                  <Label layoutX="10.0" layoutY="305.0" text="Exercise Choice" />
-                  <Label layoutX="10.0" layoutY="335.0" text="Speed" />
-                  <ChoiceBox fx:id="exerciseChoice" layoutX="110.0" layoutY="300.0" prefWidth="150.0" />
-                  <ChoiceBox fx:id="choiceOfSpeed" layoutX="110.0" layoutY="330.0" onMouseClicked="#exerciseSpeed" prefWidth="150.0" />
-                  <Button layoutX="110.0" layoutY="360.0" mnemonicParsing="false" onAction="#viewExercise" onMouseClicked="#viewExercise" text="View" />
-                  <Label layoutX="10.0" layoutY="125.0" text="BMI" textFill="#9f9f9f">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="235.0" text="Exercise" textFill="#9f9f9f">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="410.0" text="Calorie" textFill="#9f9f9f">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="455.0" text="Type" />
-                  <ChoiceBox fx:id="calorieViewType" layoutX="110.0" layoutY="450.0" prefWidth="150.0" />
-                  <Button layoutX="110.0" layoutY="480.0" mnemonicParsing="false" onAction="#viewCalorieInfo" text="View" />
-                  <Button layoutX="110.0" layoutY="80.0" mnemonicParsing="false" onAction="#viewInfo" text="View Info" />
-                  <Label layoutX="10.0" layoutY="275.0" text="Weight Goal" />
-                  <TextField fx:id="weightExercise" layoutX="110.0" layoutY="270.0" prefWidth="70.0" />
-                  <ChoiceBox fx:id="exerciseKGLB" layoutX="190.0" layoutY="270.0" prefWidth="70.0" />
-               </children>
-            </AnchorPane>
+                <AnchorPane maxWidth="-Infinity" prefWidth="300.0">
+                    <children>
+                        <Label layoutX="10.0" layoutY="15.0" minWidth="60.0" text="Menu" textFill="#9f9f9f">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="55.0" text="User Name"/>
+                        <ChoiceBox fx:id="viewUser" layoutX="110.0" layoutY="50.0" prefWidth="150.0"/>
+                        <Button layoutX="110.0" layoutY="190.0" mnemonicParsing="false" onAction="#viewBMI"
+                                onMouseClicked="#viewBMI" text="View"/>
+                        <ChoiceBox fx:id="viewInfoType" layoutX="110.0" layoutY="160.0" prefWidth="150.0"/>
+                        <Label layoutX="10.0" layoutY="164.0" text="Type"/>
+                        <Label layoutX="10.0" layoutY="305.0" text="Exercise Choice"/>
+                        <Label layoutX="10.0" layoutY="335.0" text="Speed"/>
+                        <ChoiceBox fx:id="exerciseChoice" layoutX="110.0" layoutY="300.0" prefWidth="150.0"/>
+                        <ChoiceBox fx:id="choiceOfSpeed" layoutX="110.0" layoutY="330.0" onMouseClicked="#exerciseSpeed"
+                                   prefWidth="150.0"/>
+                        <Button layoutX="110.0" layoutY="360.0" mnemonicParsing="false" onAction="#viewExercise"
+                                onMouseClicked="#viewExercise" text="View"/>
+                        <Label layoutX="10.0" layoutY="125.0" text="BMI" textFill="#9f9f9f">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="235.0" text="Exercise" textFill="#9f9f9f">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="410.0" text="Calorie" textFill="#9f9f9f">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="455.0" text="Type"/>
+                        <ChoiceBox fx:id="calorieViewType" layoutX="110.0" layoutY="450.0" prefWidth="150.0"/>
+                        <Button layoutX="110.0" layoutY="480.0" mnemonicParsing="false" onAction="#viewCalorieInfo"
+                                text="View"/>
+                        <Button layoutX="110.0" layoutY="80.0" mnemonicParsing="false" onAction="#viewInfo"
+                                text="View Info"/>
+                        <Label layoutX="10.0" layoutY="275.0" text="Weight Goal"/>
+                        <TextField fx:id="weightExercise" layoutX="110.0" layoutY="270.0" prefWidth="70.0"/>
+                        <ChoiceBox fx:id="exerciseKGLB" layoutX="190.0" layoutY="270.0" prefWidth="70.0"/>
+                    </children>
+                </AnchorPane>
                 <AnchorPane maxWidth="-Infinity" prefWidth="350.0">
                     <children>
-                        <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="15.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                  <TextArea fx:id="viewDetails" layoutX="14.0" layoutY="42.0" prefHeight="320.0" prefWidth="320.0">
-                     <font>
-                        <Font name="Roboto Regular" size="18.0" />
-                     </font></TextArea>
+                        <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="15.0" style="&#10;" text="View"
+                               textAlignment="CENTER" textFill="$x2" wrapText="false"/>
+                        <TextArea fx:id="viewDetails" layoutX="14.0" layoutY="42.0" prefHeight="320.0"
+                                  prefWidth="320.0">
+                            <font>
+                                <Font name="Roboto Regular" size="18.0"/>
+                            </font>
+                        </TextArea>
                     </children>
                 </AnchorPane>
             </items>
         </SplitPane>
         <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="900.0" spacing="5.0" VBox.vgrow="NEVER">
             <children>
-                <Label fx:id="leftStatus" />
-                <Pane HBox.hgrow="ALWAYS" />
-                <Label fx:id="rightStatus" />
+                <Label fx:id="leftStatus"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Label fx:id="rightStatus"/>
             </children>
             <padding>
-                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
             </padding>
         </HBox>
     </children>
