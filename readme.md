@@ -1,12 +1,8 @@
-# CPSC233W22Project
-
 # Author: Amasil Rahim Zihad & Fabiha Fairuzz Subha
-
-# UCID: 30164830 & 30148674
 
 ## Version: 2.2
 
-### This is fitness tracking program that allows the user to input their information and get back various results from that
+### This is a health information tracking program that allows the user to input their information and get back various results from that
 
 ### Running  the jar file
 
