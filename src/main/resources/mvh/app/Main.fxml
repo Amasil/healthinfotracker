@@ -59,7 +59,7 @@
                         <Label layoutX="10.0" layoutY="175.0" text="Height" />
                         <Button layoutX="15.0" layoutY="210.0" mnemonicParsing="false" onAction="#createUser" prefWidth="70.0" text="Add User" />
                         <ChoiceBox fx:id="userGender" layoutX="65.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" />
-                  <Button layoutX="88.0" layoutY="210.0" mnemonicParsing="false" onMouseClicked="#changeUser" text="Change Information" />
+                  <Button layoutX="88.0" layoutY="210.0" mnemonicParsing="false" onAction="#changeUser" text="Change Information" />
                   <Label layoutX="9.0" layoutY="383.0" text="Calorie" textFill="#9f9f9f">
                      <font>
                         <Font size="18.0" />
@@ -110,8 +110,8 @@
                   </Label>
                   <Label layoutX="10.0" layoutY="455.0" text="Type" />
                   <ChoiceBox fx:id="calorieViewType" layoutX="110.0" layoutY="450.0" prefWidth="150.0" />
-                  <Button layoutX="110.0" layoutY="480.0" mnemonicParsing="false" onMouseClicked="#viewCalorieInfo" text="View" />
-                  <Button layoutX="110.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#viewInfo" text="View Info" />
+                  <Button layoutX="110.0" layoutY="480.0" mnemonicParsing="false" onAction="#viewCalorieInfo" text="View" />
+                  <Button layoutX="110.0" layoutY="80.0" mnemonicParsing="false" onAction="#viewInfo" text="View Info" />
                   <Label layoutX="10.0" layoutY="275.0" text="Weight Goal" />
                   <TextField fx:id="weightExercise" layoutX="110.0" layoutY="270.0" prefWidth="70.0" />
                   <ChoiceBox fx:id="exerciseKGLB" layoutX="190.0" layoutY="270.0" prefWidth="70.0" />

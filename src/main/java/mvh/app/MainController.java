@@ -1,11 +1,8 @@
 /**
- * A fitness tracking program that allows the user to input their information and get back various results form that
+ * A health information tracking program
  * *Members:
- * Fabiha Fairuzz Subha (UCID: 30148674)
- * Amasil Rahim Zihad (UCID: 30164830)
- * Date: March 2nd, 2022- April 15, 2022,
- * Tutorial 05 and Tutorial 10.
- * Project Final Submission
+ * Fabiha Fairuzz Subha
+ * Amasil Rahim Zihad
  */
 package mvh.app;
 
@@ -267,7 +264,7 @@ public class MainController {
                                             } else {
                                                 try {
                                                     //Creating the user
-                                                    user = new User(name, gender, age, weight, height);
+                                                    user = new User(name, age, gender, weight, height);
                                                     userInfo.put(name, user);
                                                     leftStatus.setText("");
                                                     rightStatus.setText("User Added! Choose from menu");
@@ -362,7 +359,7 @@ public class MainController {
                                             } else {
                                                 try {
                                                     //Creating the user
-                                                    user = new User(name, gender, age, weight, height);
+                                                    user = new User(name, age, gender, weight, height);
                                                     userInfo.put(name, user);
                                                     leftStatus.setText("");
                                                     rightStatus.setText("User Didn't Exist so Added User! Choose from menu");
@@ -436,7 +433,7 @@ public class MainController {
                                         } else {
                                             try {
                                                 //Creating the user
-                                                user = new User(name, gender, age, weight, height);
+                                                user = new User(name, age, gender, weight, height);
                                                 userInfo.put(name, user);
                                                 rightStatus.setText("Changed Information! Choose from menu");
                                                 extractedSuccess();
