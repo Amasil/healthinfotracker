@@ -40,7 +40,7 @@ public class Reader {
         double userAge;
         double userWeight;
         double userHeight;
-        User user;
+
 
         if (fileInput.exists() && fileInput.canRead()) {
             try {
@@ -93,8 +93,12 @@ public class Reader {
                                                             if (userHeight <= 0) {
                                                                 System.err.println(userName + "’s height is 0 or a negative number");
                                                             } else {
-                                                                //Creating a user using all the user information
-                                                                user = new User(userName, userAge, userGender, userWeight, userHeight);
+                                                                User user = new User();
+                                                                user.setName(userName);
+                                                                user.setAge((int) userAge);
+                                                                user.setWeight(userWeight);
+                                                                user.setHeight(userHeight);
+                                                                user.setGender(userGender);
                                                                 MainController.userInfo.put(userName, user);
                                                                 MainController.users.add(userName);
                                                             }

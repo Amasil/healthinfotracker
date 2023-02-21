@@ -3,8 +3,8 @@ Subha,19,F,45,156
 Alice,40,F,45,150
 Bob,35,M,70,167
 Charlie,56,M,39,160
-Dora,12,F,40,130
-Harry,70,N,80, 145
+Waseem,12,F,40,130
+Lord EBER,63,N,80,145
 Arie Goud,100,N,57,169
-Sally,29,N,56,158
+Rodriguez,3,N,56,158
 Jonathan,39,M,45,167
