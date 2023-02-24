@@ -23,8 +23,6 @@ import mvh.util.Reader;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -144,12 +142,6 @@ public class MainController {
         heightChoiceChange.setValue("C.M.");
         heightChoiceChange.getItems().addAll("C.M.", "Meter");
 
-        //Special option
-        //User number to add calorie burnt for
-        calorieUser.getItems().clear();
-        calorieUser.setValue("None");
-        calorieUser.setItems(users);
-
         //Weight to be lost
         weightChoice.getItems().clear();
         weightChoice.setValue("KG");
@@ -160,11 +152,6 @@ public class MainController {
         weightChoiceChange.setValue("KG");
         weightChoiceChange.getItems().addAll("KG", "LB");
 
-        //Calorie view option
-        calorieViewType.getItems().clear();
-        calorieViewType.setValue("Total Calorie Lost");
-        calorieViewType.getItems().addAll("Total Calorie Lost", "Most amount burnt");
-
         //Exercise selection option
         exerciseChoice.getItems().clear();
         exerciseChoice.setValue("Running");
@@ -174,10 +161,6 @@ public class MainController {
         viewUser.getItems().clear();
         viewUser.setValue("None");
         viewUser.setItems(users);
-
-        //addChange.getItems().clear();
-        //addChange.setValue("Add User");
-        //addChange.getItems().addAll("Add User", "Change");
 
 
         changeUser.getItems().clear();
@@ -191,7 +174,6 @@ public class MainController {
         viewInfoType.getItems().addAll("View BMI", "View Weight Status");
         choiceOfSpeed.setValue("6-7 km/h");
 
-        inputDatePicker.setValue(LocalDate.now());
     }
 
     /**
@@ -683,94 +665,6 @@ public class MainController {
             extractedFail("No user Information found! Add user or Load From File");
         }
     }
-
-    /**
-     * Allows the user to add calories burnt to a file.
-     */
-    @FXML
-    void addCalorieBurnt() {
-//        try {
-//            //Getting the burnt calorie amount from the user
-//            int userNumber = calorieUser.getValue();
-//            //If the user didn't input anything it will ask them to input
-//            if (calorieAmount.getText().equals("")) {
-//                extractedFail("Please Enter Calorie Amount");
-//            } else {
-//                try {
-//                    int calorie = Integer.parseInt(calorieAmount.getText());
-//                    //Calorie Amount shouldn't be a negative number
-//                    if (calorie < 0) {
-//                        extractedFail("Please Enter 0 or a positive number for calorie Amount");
-//                    } else {
-//                        //Creating a hashmap with the users' calorie information
-//                        HashMap<Integer, String> calorieInfo = new HashMap<>();
-//                        calorieInfo.put(userNumber, String.valueOf(calorie));
-//                        //Writing the information to a file
-//                        Writer.writer(calorieInfo);
-//                        rightStatus.setText("Calorie added to file!");
-//                        extractedSuccess();
-//                        viewDetails.setText("");
-//                    }
-//                } catch (Exception e) {
-//                    extractedFail("Please Enter 0 or a positive number for calorie Amount");
-//                }
-//            }
-//        } catch (Exception e) {
-//            extractedFail("Cannot be added to file!");
-//        }
-    }
-
-    /**
-     * Allows the user to check the calorie info of the user
-     */
-    @FXML
-    void viewCalorieInfo() {
-
-        name = viewUser.getValue();
-        keyCheck = userInfo.containsKey(name);
-        try {
-            //Creating a hashmap to store the calories of the user read from a file
-            //Checking if the file has that key
-            //Getting the user choice
-            if (calorieViewType.getValue().equals("Total Calorie Lost")) {
-                if (keyCheck) {
-                    try {
-                        File outFile = new File("User.txt");
-                        HashMap<String, ArrayList<Integer>> calorieInfo = Reader.outReader(name, outFile);
-                        //Calling the total calories' method to get the output
-                        int totalCalories = Calculations.getTotalCalories(name, calorieInfo);
-                        viewDetails.setText("Total calories lost " + totalCalories);
-                        rightStatus.setText("Requested info shown!");
-                        extractedSuccess();
-                    } catch (Exception e) {
-                        extractedFail("Couldn't Read File");
-                    }
-                } else {
-                    extractedFail("No user Information found! Add user or Load From File");
-                }
-
-            } else {
-                if (keyCheck) {
-                    try {
-                        //Calling the max calories' method to get the output
-                        File outFile = new File("User.txt");
-                        HashMap<String, ArrayList<Integer>> calorieInfo = Reader.outReader(name, outFile);
-                        int maxCalories = Calculations.getMaxCalories(name, calorieInfo);
-                        viewDetails.setText("Maximum calories lost in a day is" + maxCalories);
-                        rightStatus.setText("Requested info shown!");
-                        extractedSuccess();
-                    } catch (Exception e) {
-                        extractedFail("No user Information found! Add user or Load From File");
-                    }
-                } else {
-                    extractedFail("No user Information found! Add user or Load From File");
-                }
-            }
-        } catch (Exception e) {
-            extractedFail("No user Information found! Add user or Load From File");
-        }
-    }
-
     /**
      * Allows the user to load a file and get user information from that file
      */
