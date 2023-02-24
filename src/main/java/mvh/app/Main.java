@@ -26,7 +26,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
         //Checking if any argument is passed or not
         if (args.length != 0) {

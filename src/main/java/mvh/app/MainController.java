@@ -99,15 +99,16 @@ public class MainController {
     @FXML
     private String name;
     @FXML
-    private String gender;
+    private int age;
     @FXML
-    private boolean keyCheck;
+    private String gender;
     @FXML
     private double weight;
     @FXML
     private double height;
     @FXML
-    private int age;
+    private boolean keyCheck;
+
 
     /**
      * Starts the program and puts the choices in the choiceBox.
@@ -304,10 +305,9 @@ public class MainController {
                                                     leftStatus.setText("");
                                                     rightStatus.setText("User Added! Choose from menu");
                                                     extractedSuccess();
-                                                    //viewDetails.setText("");
-                                                    //Adding the username to the choiceBox so that it can be viewed
                                                     users.add(name);
                                                     viewUser.setValue("Select");
+                                                    changeUser.setValue("Select");
                                                 } catch (Exception e) {
                                                     extractedFail("Couldn't add user");
                                                 }
@@ -338,51 +338,67 @@ public class MainController {
      */
     @FXML
     void changeName() {
-        name = changeUser.getValue();
-        if (Objects.equals(name, "None") || (user == null)) {
-            extractedFail("Please Select an user");
-        } else if (userInfo.containsKey(name)) {
-            User user = (User) userInfo.get(name);
+        try {
+            name = changeUser.getValue();
             String newName = userNameChange.getText();
-            user.setName(newName);
-            user.setAge(user.getAge());
-            user.setWeight(user.getWeight());
-            user.setHeight(user.getHeight());
-            user.setGender(user.getGender());
-            userInfo.put(newName, user);
-            leftStatus.setText("");
-            rightStatus.setText("");
-            extractedSuccess();
-            users.remove(name);
-            users.add(newName);
-            viewUser.setValue("Select");
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                extractedFail("Please Select an user");
+            } else {
+                try {
+                    if (Objects.equals(userNameChange.getText(), "")) {
+                        extractedFail("Please Enter An Username");
+                    } else {
+                        User user = (User) userInfo.get(name);
+                        user.setName(newName);
+                        user.setAge(user.getAge());
+                        user.setWeight(user.getWeight());
+                        user.setHeight(user.getHeight());
+                        user.setGender(user.getGender());
+                        users.remove(name);
+                        changeUserMap(user, newName);
+                    }
+                } catch (Exception e) {
+                    extractedFail("Please Enter An Username");
+                }
+            }
+        } catch (Exception e) {
+            extractedFail("Please Select an user");
         }
     }
-
 
     /**
      * Change the information of a user
      */
     @FXML
     void changeAge() {
-        name = changeUser.getValue();
-        if (Objects.equals(name, "None") || (user == null)) {
+        try {
+            name = changeUser.getValue();
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                extractedFail("Please Select an user");
+            } else {
+                //Trying To get valid input from the user
+                try {
+                    int newAge = Integer.parseInt(userAgeChange.getText());
+                    //Age Can't be Negative or 0
+                    if (newAge < 0) {
+                        extractedFail("Age can't be a negative number");
+                    } else if (newAge == 0) {
+                        extractedFail("Age can't be 0");
+                    } else {
+                        User user = (User) userInfo.get(name);
+                        user.setName(user.getName());
+                        user.setAge(newAge);
+                        user.setWeight(user.getWeight());
+                        user.setHeight(user.getHeight());
+                        user.setGender(user.getGender());
+                        changeUserMap(user, name);
+                    }
+                } catch (Exception e) {
+                    extractedFail("Enter A Positive Number For Age");
+                }
+            }
+        } catch (Exception e) {
             extractedFail("Please Select an user");
-        } else if (userInfo.containsKey(name)) {
-            User user = (User) userInfo.get(name);
-            String newName = userNameChange.getText();
-            user.setName(newName);
-            user.setAge(user.getAge());
-            user.setWeight(user.getWeight());
-            user.setHeight(user.getHeight());
-            user.setGender(user.getGender());
-            userInfo.put(newName, user);
-            leftStatus.setText("");
-            rightStatus.setText("");
-            extractedSuccess();
-            users.remove(name);
-            users.add(newName);
-            viewUser.setValue("Select");
         }
     }
 
@@ -391,24 +407,23 @@ public class MainController {
      */
     @FXML
     void changeGender() {
-        name = changeUser.getValue();
-        if (Objects.equals(name, "None") || (user == null)) {
+        try {
+            name = changeUser.getValue();
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                extractedFail("Please Select an user");
+            } else {
+                //Getting the name and the gender of the user
+                String newGender = String.valueOf(userGenderChange.getValue());
+                User user = (User) userInfo.get(name);
+                user.setName(user.getName());
+                user.setAge(user.getAge());
+                user.setWeight(user.getWeight());
+                user.setHeight(user.getHeight());
+                user.setGender(newGender);
+                changeUserMap(user, name);
+            }
+        } catch (Exception e) {
             extractedFail("Please Select an user");
-        } else if (userInfo.containsKey(name)) {
-            User user = (User) userInfo.get(name);
-            String newName = userNameChange.getText();
-            user.setName(newName);
-            user.setAge(user.getAge());
-            user.setWeight(user.getWeight());
-            user.setHeight(user.getHeight());
-            user.setGender(user.getGender());
-            userInfo.put(newName, user);
-            leftStatus.setText("");
-            rightStatus.setText("");
-            extractedSuccess();
-            users.remove(name);
-            users.add(newName);
-            viewUser.setValue("Select");
         }
     }
 
@@ -417,24 +432,43 @@ public class MainController {
      */
     @FXML
     void changeWeight() {
-        name = changeUser.getValue();
-        if (Objects.equals(name, "None") || (user == null)) {
+        try {
+            name = changeUser.getValue();
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                extractedFail("Please Select an user");
+            } else {
+                try {
+                    //If the option chosen is kilograms
+                    double newWeight;
+                    if (weightChoiceChange.getValue().equals("KG")) {
+                        newWeight = Double.parseDouble(userWeightChange.getText());
+                    }
+                    //If the option chosen is pounds
+                    else {
+                        //Converting the lbs to kg
+                        newWeight = lbToKg * Double.parseDouble(userWeightChange.getText());
+                    }
+                    //Weight Can't be Negative or 0
+                    if (newWeight < 0) {
+                        extractedFail("Weight can't be a negative number");
+                    } else if (newWeight == 0) {
+                        extractedFail("Weight can't Be 0");
+                    } else {
+                        newWeight = Double.parseDouble(String.format("%.1f", newWeight));
+                        User user = (User) userInfo.get(name);
+                        user.setName(user.getName());
+                        user.setAge(user.getAge());
+                        user.setWeight(newWeight);
+                        user.setHeight(user.getHeight());
+                        user.setGender(user.getGender());
+                        changeUserMap(user, name);
+                    }
+                } catch (Exception e) {
+                    extractedFail("Enter A Positive Number For Weight");
+                }
+            }
+        } catch (Exception e) {
             extractedFail("Please Select an user");
-        } else if (userInfo.containsKey(name)) {
-            User user = (User) userInfo.get(name);
-            String newName = userNameChange.getText();
-            user.setName(newName);
-            user.setAge(user.getAge());
-            user.setWeight(user.getWeight());
-            user.setHeight(user.getHeight());
-            user.setGender(user.getGender());
-            userInfo.put(newName, user);
-            leftStatus.setText("");
-            rightStatus.setText("");
-            extractedSuccess();
-            users.remove(name);
-            users.add(newName);
-            viewUser.setValue("Select");
         }
     }
 
@@ -443,188 +477,53 @@ public class MainController {
      */
     @FXML
     void changeHeight() {
-        name = changeUser.getValue();
-        if (Objects.equals(name, "None") || (user == null)) {
-            extractedFail("Please Select an user");
-        } else if (userInfo.containsKey(name)) {
-            User user = (User) userInfo.get(name);
-            String newName = userNameChange.getText();
-            user.setName(newName);
-            user.setAge(user.getAge());
-            user.setWeight(user.getWeight());
-            user.setHeight(user.getHeight());
-            user.setGender(user.getGender());
-            userInfo.put(newName, user);
-            leftStatus.setText("");
-            rightStatus.setText("");
-            extractedSuccess();
-            users.remove(name);
-            users.add(newName);
-            viewUser.setValue("Select");
-        }
-    }
-
-    /**
-     * Change the information of a user
-     */
-    @FXML
-    void changeUser() {
         try {
-            //If any of the field is empty the program will show an Error.
-            if (userName.getText().equals("") || userAge.getText().equals("") || userWeight.getText().equals("") || userHeight.getText().equals("")) {
-                extractedFail("Please Enter All Information to Change User");
+            name = changeUser.getValue();
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                extractedFail("Please Select an user");
+                System.out.println("HB");
             } else {
-                name = userName.getText();
-                //Checking if that user exists or not
-                keyCheck = userInfo.containsKey(name);
-                //If the user doesn't exist we will add that user
-                if (!keyCheck) {
-                    try {
-                        //Getting the name and the gender of the user
-                        gender = String.valueOf(userGender.getValue());
-                        //Trying To get valid input from the user
-                        try {
-                            age = Integer.parseInt(userAge.getText());
-                            //Age Can't be Negative or 0
-                            if (age < 0) {
-                                extractedFail("Age can't be a negative number");
-                            } else if (age == 0) {
-                                extractedFail("Age can't be 0");
-                            } else {
-                                try {
-                                    //If the option chosen is kilograms
-                                    if (weightChoice.getValue().equals("KG")) {
-                                        weight = Double.parseDouble(userWeight.getText());
-                                    }
-                                    //If the option chosen is pounds
-                                    else {
-                                        //Converting the lbs to kg
-                                        weight = lbToKg * Double.parseDouble(userWeight.getText());
-                                    }
-                                    //Weight Can't be Negative or 0
-                                    if (weight < 0) {
-                                        extractedFail("Weight can't be a negative number");
-                                    } else if (weight == 0) {
-                                        extractedFail("Weight can't Be 0");
-                                    } else {
-                                        weight = Double.parseDouble(String.format("%.1f", weight));
-                                        try {
-                                            //If height is cm
-                                            if (heightChoice.getValue().equals("C.M.")) {
-                                                height = Double.parseDouble(userHeight.getText());
-                                            } else {
-                                                //Converting meter to cm
-                                                height = 100 * Double.parseDouble(userHeight.getText());
-                                            }
-                                            //Height Can't be negative or 0
-                                            if (height < 0) {
-                                                extractedFail("Height can't be a negative number");
-                                            } else if (height == 0) {
-                                                extractedFail("Height can't be 0");
-                                            } else {
-                                                try {
-                                                    //Creating the user
-                                                    // user = new User(name, age, gender, weight, height);
-                                                    userInfo.put(name, user);
-                                                    leftStatus.setText("");
-                                                    rightStatus.setText("User Didn't Exist so Added User! Choose from menu");
-                                                    extractedSuccess();
-                                                    viewDetails.setText("");
-                                                    users.add(name);
-                                                    viewUser.setValue("Select");
-                                                } catch (Exception e) {
-                                                    extractedFail("Couldn't add user");
-                                                }
-                                            }
-                                        } catch (Exception e) {
-                                            extractedFail("Enter A Positive Number For Height");
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    extractedFail("Enter A Positive Number For Weight");
-                                }
-                            }
-                        } catch (Exception e) {
-                            extractedFail("Enter A Positive Number For Age");
-                        }
-                    } catch (Exception e) {
-                        extractedFail("Please Enter All Information");
+                try {
+                    //If height is cm
+                    double newHeight;
+                    if (heightChoiceChange.getValue().equals("C.M.")) {
+                        newHeight = Double.parseDouble(userHeightChange.getText());
+                    } else {
+                        //Converting meter to cm
+                        newHeight = 100 * Double.parseDouble(userHeightChange.getText());
                     }
-                }
-                //If the user exists we replace the user
-                if (keyCheck) {
-                    //Getting the name and the gender of the user
-                    name = userName.getText();
-                    gender = String.valueOf(userGender.getValue());
-                    //Trying To get valid input from the user
-                    try {
-                        age = Integer.parseInt(userAge.getText());
-                        //Age Can't be Negative or 0
-                        if (age < 0) {
-                            extractedFail("Age can't be a negative number");
-                        } else if (age == 0) {
-                            extractedFail("Age can't be 0");
-                        } else {
-                            try {
-                                //If the option chosen is kilograms
-                                if (weightChoice.getValue().equals("KG")) {
-                                    weight = Double.parseDouble(userWeight.getText());
-                                }
-                                //If the option chosen is anything else
-                                else {
-                                    //Converting the lbs to kg
-                                    weight = lbToKg * Double.parseDouble(userWeight.getText());
-                                }
-                                //Weight Can't be Negative or 0
-                                if (weight < 0) {
-                                    extractedFail("Weight can't be a negative number");
-                                } else if (weight == 0) {
-                                    extractedFail("Weight can't Be 0");
-                                } else {
-                                    weight = Double.parseDouble(String.format("%.1f", weight));
-                                    try {
-                                        //If height is cm
-                                        if (heightChoice.getValue().equals("C.M.")) {
-                                            height = Double.parseDouble(userHeight.getText());
-                                        } else {
-                                            //Converting meter to cm
-                                            height = 100 * Double.parseDouble(userHeight.getText());
-                                        }
-                                        //Height can't be negative or 0
-                                        if (height < 0) {
-                                            extractedFail("Height can't' be a negative number");
-                                        } else if (height == 0) {
-                                            extractedFail("Height can't be 0");
-                                        } else {
-                                            try {
-                                                //Creating the user
-                                                //user = new User(name, age, gender, weight, height);
-                                                userInfo.put(name, user);
-                                                rightStatus.setText("Changed Information! Choose from menu");
-                                                extractedSuccess();
-                                                viewDetails.setText("");
-                                                users.add(name);
-                                                viewUser.setValue("Select");
-                                            } catch (Exception e) {
-                                                extractedFail("Couldn't change user Information");
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        extractedFail("Enter A Positive Number For Height");
-                                    }
-                                }
-                            } catch (Exception e) {
-                                extractedFail("Enter A Positive Number For Weight");
-                            }
-                        }
-                    } catch (Exception e) {
-                        extractedFail("Enter A Positive Number For Age");
+                    //Height Can't be negative or 0
+                    if (newHeight < 0) {
+                        extractedFail("Height can't be a negative number");
+                    } else if (newHeight == 0) {
+                        extractedFail("Height can't be 0");
+                    } else {
+                        User user = (User) userInfo.get(name);
+                        user.setName(user.getName());
+                        user.setAge(user.getAge());
+                        user.setWeight(user.getWeight());
+                        user.setHeight(newHeight);
+                        user.setGender(user.getGender());
+                        changeUserMap(user, name);
                     }
+                } catch (Exception e) {
+                    extractedFail("Enter A Positive Number For Height");
                 }
             }
         } catch (Exception e) {
-            extractedFail("Please Enter All Information");
+            extractedFail("Please Select an user");
         }
+    }
+
+    private void changeUserMap(User user, String name) {
+        userInfo.put(name, user);
+        users.remove(name);
+        users.add(name);
+        extractedSuccess();
+        leftStatus.setText("");
+        rightStatus.setText("");
+        viewUser.setValue("Select");
+        changeUser.setValue("Select");
     }
 
 
@@ -643,7 +542,6 @@ public class MainController {
             if (name.equals("Select")) {
                 extractedFail("Please Select an user");
             } else {
-                System.out.println(userInfo.get(name).toString());
                 userDetailsController.viewUserDetails.setText(userInfo.get(name).toString());
                 rightStatus.setText("User Info Printed! View above");
                 extractedSuccess();
