@@ -58,9 +58,7 @@
   <div align="center"><a href="https://imgbox.com/gpoTu4o4" target="_blank"><img src="https://images2.imgbox.com/62/03/gpoTu4o4_o.png" alt="image host"/></a></div>
 
 - Clicking any of the **View** buttons will open a new scene/window with the info requested being displayed on it.
-
-    <div align="center"><a href="https://imgbox.com/yjL1Tc4y" target="_blank"><img src="https://images2.imgbox.com/0e/d6/yjL1Tc4y_o.png" alt="image host"/></a></div>
-
+  <div align="center"><a href="https://imgbox.com/yjL1Tc4y" target="_blank"><img src="https://images2.imgbox.com/0e/d6/yjL1Tc4y_o.png" alt="image host"/></a></div>
 - At the very bottom there is a status bar which shows if any changes were made or any error occurred. The program can
   also save the information of the people that the user changed/created in a .txt file that can be later loaded to get
   the same information. This can be done with the *Save* as option in *File* in the menu bar.
