@@ -510,7 +510,7 @@ public class MainController {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setResizable(false);
-                stage.setTitle("User Information");
+                stage.setTitle("Information");
                 stage.show();
             }
             //Exception handled
@@ -571,7 +571,7 @@ public class MainController {
                                         Stage stage = new Stage();
                                         stage.setScene(new Scene(root));
                                         stage.setResizable(false);
-                                        stage.setTitle("User Information");
+                                        stage.setTitle("Information");
                                         stage.show();
                                         rightStatus.setText("Requested info shown!");
                                         extractedSuccess();
@@ -584,7 +584,7 @@ public class MainController {
                                         Stage stage = new Stage();
                                         stage.setScene(new Scene(root));
                                         stage.setResizable(false);
-                                        stage.setTitle("User Information");
+                                        stage.setTitle("Information");
                                         stage.show();
                                         rightStatus.setText("Requested info shown!");
                                         extractedSuccess();
@@ -597,7 +597,7 @@ public class MainController {
                                         Stage stage = new Stage();
                                         stage.setScene(new Scene(root));
                                         stage.setResizable(false);
-                                        stage.setTitle("User Information");
+                                        stage.setTitle("Information");
                                         stage.show();
                                         rightStatus.setText("Requested info shown!");
                                         extractedSuccess();
@@ -642,9 +642,8 @@ public class MainController {
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
                     stage.setResizable(false);
-                    stage.setTitle("User Information");
+                    stage.setTitle("Information");
                     stage.show();
-                    //viewDetails.setText(name + " is " + Calculations.bmiCompare(weight, height) + ".");
                     rightStatus.setText("Requested info shown!");
                     extractedSuccess();
                 }
@@ -658,9 +657,8 @@ public class MainController {
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
                     stage.setResizable(false);
-                    stage.setTitle("BMI Information");
+                    stage.setTitle("Information");
                     stage.show();
-                    //viewDetails.setText(name + " is " + Calculations.bmiCompare(weight, height) + ".");
                     rightStatus.setText("Requested info shown!");
                     extractedSuccess();
                 }
