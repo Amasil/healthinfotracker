@@ -1,8 +1,7 @@
 /**
  * A health information tracking program
- * *Members:
- * Fabiha Fairuzz Subha
  * Amasil Rahim Zihad
+ * Code heavily adapted from my university project done with Fabiha Fairuzz Subha.
  */
 package mvh.util;
 
@@ -13,8 +12,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Reader {
     //We know that the information will always be in this order.
@@ -129,43 +126,5 @@ public class Reader {
                 System.err.println("There is an Issue with the file");
             }
         }
-    }
-
-    /**
-     * Creates an array list with calories burnt info
-     *
-     * @return An array list containing the user input data about calories burnt
-     */
-    public static HashMap<String, ArrayList<Integer>> outReader(String inputName, File outFile) throws IOException {
-        //The file that stores the information of calories burnt.
-        //Initializing an empty Hashmap and a new Arraylist for storing the data.
-        HashMap<String, ArrayList<Integer>> outInfo = null;
-        ArrayList<Integer> list = new ArrayList<>();
-        if (outFile.exists()) {
-            //Creating a file reader and a buffered reader
-            FileReader f_reader = new FileReader(outFile);
-            BufferedReader b_reader = new BufferedReader(f_reader);
-            //Reading lines until the file is empty.
-            String line = b_reader.readLine();
-            outInfo = new HashMap<>();
-            while (line != null) {
-                String[] readInfo = line.split(",");
-
-                if (readInfo[0].equals(inputName)) {
-                    //Adding the calorie information to the arraylist.
-                    list.add(Integer.parseInt(readInfo[1]));
-                }
-                line = b_reader.readLine();
-                //Adding the calorie information to the hashmap
-                outInfo.put(inputName, list);
-            }
-        }
-        //If file does not exist
-        else {
-            System.err.println("Cannot find a file to read!");
-        }
-        //Returns the HashMap with calorie information.
-        return outInfo;
-
     }
 }

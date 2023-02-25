@@ -1,12 +1,17 @@
+/**
+ * A health information tracking program
+ * Amasil Rahim Zihad
+ * Code heavily adapted from my university project done with Fabiha Fairuzz Subha.
+ */
 package mvh.app;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-public class UserDetailsController {
+public class DetailsController {
     @FXML
-    public TextArea viewUserDetails;
+    public TextArea viewDetails;
     @FXML
     private javafx.scene.control.Button closeButton;
 

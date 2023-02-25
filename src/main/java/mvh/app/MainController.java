@@ -1,8 +1,7 @@
 /**
  * A health information tracking program
- * *Members:
- * Fabiha Fairuzz Subha
  * Amasil Rahim Zihad
+ * Code heavily adapted from my university project done with Fabiha Fairuzz Subha.
  */
 package mvh.app;
 
@@ -13,13 +12,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mvh.user.User;
 import mvh.util.Calculations;
 import mvh.util.Reader;
+import mvh.util.Writer;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +30,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class MainController {
     //Store the data of user
     private User user;
@@ -42,8 +46,6 @@ public class MainController {
     private ComboBox<String> viewUser;
     @FXML
     private ComboBox<String> changeUser;
-    @FXML
-    private ComboBox<String> calorieUser;
     @FXML
     private ComboBox<String> viewInfoType;
     @FXML
@@ -63,9 +65,9 @@ public class MainController {
     @FXML
     private ComboBox<String> heightChoiceChange;
     @FXML
-    private ComboBox<String> calorieViewType;
-    @FXML
     private ComboBox<String> exerciseKGLB;
+    @FXML
+    private ComboBox<String> changeOptions;
     @FXML
     private TextField userName;
     @FXML
@@ -83,29 +85,17 @@ public class MainController {
     @FXML
     private TextField userHeightChange;
     @FXML
-    private TextField calorieAmount;
-    @FXML
     private TextField weightExercise;
     @FXML
     private Label leftStatus;
     @FXML
     private Label rightStatus;
     @FXML
-    private TextArea viewDetails;
-    @FXML
-    private DatePicker inputDatePicker;
-    @FXML
     private String name;
-    @FXML
-    private int age;
-    @FXML
-    private String gender;
     @FXML
     private double weight;
     @FXML
     private double height;
-    @FXML
-    private boolean keyCheck;
 
 
     /**
@@ -157,6 +147,11 @@ public class MainController {
         exerciseChoice.setValue("Running");
         exerciseChoice.getItems().addAll("Running", "Cycling");
 
+        //Exercise selection option
+        changeOptions.getItems().clear();
+        changeOptions.setValue("Select");
+        changeOptions.getItems().addAll("Name", "Age", "Gender", "Weight", "Height");
+
         //View Info user number
         viewUser.getItems().clear();
         viewUser.setValue("None");
@@ -166,7 +161,6 @@ public class MainController {
         changeUser.getItems().clear();
         changeUser.setValue("None");
         changeUser.setItems(users);
-
 
         //BMI View
         viewInfoType.getItems().clear();
@@ -229,15 +223,15 @@ public class MainController {
                     //Getting the name and the gender of the user
                     name = userName.getText();
                     //Checking if that user exists or not
-                    keyCheck = userInfo.containsKey(name);
+                    boolean keyCheck = userInfo.containsKey(name);
                     //If the user doesn't exist we will add that user
                     if (keyCheck) {
                         extractedFail("The User " + name + " already exists.");
                     } else {
-                        gender = String.valueOf(userGender.getValue());
+                        String gender = String.valueOf(userGender.getValue());
                         //Trying To get valid input from the user
                         try {
-                            age = Integer.parseInt(userAge.getText());
+                            int age = Integer.parseInt(userAge.getText());
                             //Age Can't be Negative or 0
                             if (age < 0) {
                                 extractedFail("Age can't be a negative number");
@@ -315,6 +309,33 @@ public class MainController {
         }
     }
 
+    @FXML
+    void changeTrigger() {
+        try {
+            name = changeUser.getValue();
+            if (Objects.equals(name, "None") || (userInfo == null)) {
+                extractedFail("Please Add Users First");
+            } else if (Objects.equals(name, "Select")) {
+                extractedFail("Please select an User");
+            } else {
+                String changeOptionValue = changeOptions.getValue();
+                if (Objects.equals(changeOptionValue, "Name")) {
+                    changeName();
+                } else if (Objects.equals(changeOptionValue, "Age")) {
+                    changeAge();
+                } else if (Objects.equals(changeOptionValue, "Gender")) {
+                    changeGender();
+                } else if (Objects.equals(changeOptionValue, "Weight")) {
+                    changeWeight();
+                } else if (Objects.equals(changeOptionValue, "Height")) {
+                    changeHeight();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Change the information of a user
      */
@@ -323,28 +344,20 @@ public class MainController {
         try {
             name = changeUser.getValue();
             String newName = userNameChange.getText();
-            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
-                extractedFail("Please Select an user");
+            if (Objects.equals(userNameChange.getText(), "")) {
+                extractedFail("Please Enter An Username");
             } else {
-                try {
-                    if (Objects.equals(userNameChange.getText(), "")) {
-                        extractedFail("Please Enter An Username");
-                    } else {
-                        User user = (User) userInfo.get(name);
-                        user.setName(newName);
-                        user.setAge(user.getAge());
-                        user.setWeight(user.getWeight());
-                        user.setHeight(user.getHeight());
-                        user.setGender(user.getGender());
-                        users.remove(name);
-                        changeUserMap(user, newName);
-                    }
-                } catch (Exception e) {
-                    extractedFail("Please Enter An Username");
-                }
+                User user = (User) userInfo.get(name);
+                user.setName(newName);
+                user.setAge(user.getAge());
+                user.setWeight(user.getWeight());
+                user.setHeight(user.getHeight());
+                user.setGender(user.getGender());
+                users.remove(name);
+                changeUserMap(user, newName);
             }
         } catch (Exception e) {
-            extractedFail("Please Select an user");
+            extractedFail("Please Enter An Username");
         }
     }
 
@@ -353,34 +366,26 @@ public class MainController {
      */
     @FXML
     void changeAge() {
+
+        //Trying To get valid input from the user
         try {
-            name = changeUser.getValue();
-            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
-                extractedFail("Please Select an user");
+            int newAge = Integer.parseInt(userAgeChange.getText());
+            //Age Can't be Negative or 0
+            if (newAge < 0) {
+                extractedFail("Age can't be a negative number");
+            } else if (newAge == 0) {
+                extractedFail("Age can't be 0");
             } else {
-                //Trying To get valid input from the user
-                try {
-                    int newAge = Integer.parseInt(userAgeChange.getText());
-                    //Age Can't be Negative or 0
-                    if (newAge < 0) {
-                        extractedFail("Age can't be a negative number");
-                    } else if (newAge == 0) {
-                        extractedFail("Age can't be 0");
-                    } else {
-                        User user = (User) userInfo.get(name);
-                        user.setName(user.getName());
-                        user.setAge(newAge);
-                        user.setWeight(user.getWeight());
-                        user.setHeight(user.getHeight());
-                        user.setGender(user.getGender());
-                        changeUserMap(user, name);
-                    }
-                } catch (Exception e) {
-                    extractedFail("Enter A Positive Number For Age");
-                }
+                User user = (User) userInfo.get(name);
+                user.setName(user.getName());
+                user.setAge(newAge);
+                user.setWeight(user.getWeight());
+                user.setHeight(user.getHeight());
+                user.setGender(user.getGender());
+                changeUserMap(user, name);
             }
         } catch (Exception e) {
-            extractedFail("Please Select an user");
+            extractedFail("Enter A Positive Number For Age");
         }
     }
 
@@ -390,20 +395,15 @@ public class MainController {
     @FXML
     void changeGender() {
         try {
-            name = changeUser.getValue();
-            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
-                extractedFail("Please Select an user");
-            } else {
-                //Getting the name and the gender of the user
-                String newGender = String.valueOf(userGenderChange.getValue());
-                User user = (User) userInfo.get(name);
-                user.setName(user.getName());
-                user.setAge(user.getAge());
-                user.setWeight(user.getWeight());
-                user.setHeight(user.getHeight());
-                user.setGender(newGender);
-                changeUserMap(user, name);
-            }
+            //Getting the name and the gender of the user
+            String newGender = String.valueOf(userGenderChange.getValue());
+            User user = (User) userInfo.get(name);
+            user.setName(user.getName());
+            user.setAge(user.getAge());
+            user.setWeight(user.getWeight());
+            user.setHeight(user.getHeight());
+            user.setGender(newGender);
+            changeUserMap(user, name);
         } catch (Exception e) {
             extractedFail("Please Select an user");
         }
@@ -415,42 +415,33 @@ public class MainController {
     @FXML
     void changeWeight() {
         try {
-            name = changeUser.getValue();
-            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
-                extractedFail("Please Select an user");
+            //If the option chosen is kilograms
+            double newWeight;
+            if (weightChoiceChange.getValue().equals("KG")) {
+                newWeight = Double.parseDouble(userWeightChange.getText());
+            }
+            //If the option chosen is pounds
+            else {
+                //Converting the lbs to kg
+                newWeight = lbToKg * Double.parseDouble(userWeightChange.getText());
+            }
+            //Weight Can't be Negative or 0
+            if (newWeight < 0) {
+                extractedFail("Weight can't be a negative number");
+            } else if (newWeight == 0) {
+                extractedFail("Weight can't Be 0");
             } else {
-                try {
-                    //If the option chosen is kilograms
-                    double newWeight;
-                    if (weightChoiceChange.getValue().equals("KG")) {
-                        newWeight = Double.parseDouble(userWeightChange.getText());
-                    }
-                    //If the option chosen is pounds
-                    else {
-                        //Converting the lbs to kg
-                        newWeight = lbToKg * Double.parseDouble(userWeightChange.getText());
-                    }
-                    //Weight Can't be Negative or 0
-                    if (newWeight < 0) {
-                        extractedFail("Weight can't be a negative number");
-                    } else if (newWeight == 0) {
-                        extractedFail("Weight can't Be 0");
-                    } else {
-                        newWeight = Double.parseDouble(String.format("%.1f", newWeight));
-                        User user = (User) userInfo.get(name);
-                        user.setName(user.getName());
-                        user.setAge(user.getAge());
-                        user.setWeight(newWeight);
-                        user.setHeight(user.getHeight());
-                        user.setGender(user.getGender());
-                        changeUserMap(user, name);
-                    }
-                } catch (Exception e) {
-                    extractedFail("Enter A Positive Number For Weight");
-                }
+                newWeight = Double.parseDouble(String.format("%.1f", newWeight));
+                User user = (User) userInfo.get(name);
+                user.setName(user.getName());
+                user.setAge(user.getAge());
+                user.setWeight(newWeight);
+                user.setHeight(user.getHeight());
+                user.setGender(user.getGender());
+                changeUserMap(user, name);
             }
         } catch (Exception e) {
-            extractedFail("Please Select an user");
+            extractedFail("Enter A Positive Number For Weight");
         }
     }
 
@@ -460,40 +451,30 @@ public class MainController {
     @FXML
     void changeHeight() {
         try {
-            name = changeUser.getValue();
-            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
-                extractedFail("Please Select an user");
-                System.out.println("HB");
+            //If height is cm
+            double newHeight;
+            if (heightChoiceChange.getValue().equals("C.M.")) {
+                newHeight = Double.parseDouble(userHeightChange.getText());
             } else {
-                try {
-                    //If height is cm
-                    double newHeight;
-                    if (heightChoiceChange.getValue().equals("C.M.")) {
-                        newHeight = Double.parseDouble(userHeightChange.getText());
-                    } else {
-                        //Converting meter to cm
-                        newHeight = 100 * Double.parseDouble(userHeightChange.getText());
-                    }
-                    //Height Can't be negative or 0
-                    if (newHeight < 0) {
-                        extractedFail("Height can't be a negative number");
-                    } else if (newHeight == 0) {
-                        extractedFail("Height can't be 0");
-                    } else {
-                        User user = (User) userInfo.get(name);
-                        user.setName(user.getName());
-                        user.setAge(user.getAge());
-                        user.setWeight(user.getWeight());
-                        user.setHeight(newHeight);
-                        user.setGender(user.getGender());
-                        changeUserMap(user, name);
-                    }
-                } catch (Exception e) {
-                    extractedFail("Enter A Positive Number For Height");
-                }
+                //Converting meter to cm
+                newHeight = 100 * Double.parseDouble(userHeightChange.getText());
+            }
+            //Height Can't be negative or 0
+            if (newHeight < 0) {
+                extractedFail("Height can't be a negative number");
+            } else if (newHeight == 0) {
+                extractedFail("Height can't be 0");
+            } else {
+                User user = (User) userInfo.get(name);
+                user.setName(user.getName());
+                user.setAge(user.getAge());
+                user.setWeight(user.getWeight());
+                user.setHeight(newHeight);
+                user.setGender(user.getGender());
+                changeUserMap(user, name);
             }
         } catch (Exception e) {
-            extractedFail("Please Select an user");
+            extractedFail("Enter A Positive Number For Height");
         }
     }
 
@@ -514,17 +495,16 @@ public class MainController {
      */
     @FXML
     void viewInfo() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserDetails.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewDetails.fxml"));
         Parent root = loader.load();
-        UserDetailsController userDetailsController = loader.getController();
-
+        DetailsController detailsController = loader.getController();
         try {
             //Getting the username
             name = viewUser.getValue();
-            if (name.equals("Select")) {
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
                 extractedFail("Please Select an user");
             } else {
-                userDetailsController.viewUserDetails.setText(userInfo.get(name).toString());
+                detailsController.viewDetails.setText(userInfo.get(name).toString());
                 rightStatus.setText("User Info Printed! View above");
                 extractedSuccess();
                 Stage stage = new Stage();
@@ -544,65 +524,87 @@ public class MainController {
      * Allows the user to choose their choice of exercise and get feedbacks
      */
     @FXML
-    void viewExercise() {
+    void viewExercise() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewDetails.fxml"));
+        Parent root = loader.load();
+        DetailsController detailsController = loader.getController();
         try {
             //Getting the user number
             name = viewUser.getValue();
-            keyCheck = userInfo.containsKey(name);
             try {
-                if (weightExercise.getText().equals("")) {
-                    extractedFail("Please Enter A Weight Goal");
+                if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                    extractedFail("Please Select an user");
                 } else {
                     try {
-                        //If the option chosen is kilograms
-                        double exerciseWeight;
-                        if (exerciseKGLB.getValue().equals("KG")) {
-                            exerciseWeight = Double.parseDouble(weightExercise.getText());
-                        }
-                        //If the option chosen is anything else
-                        else {
-                            //Converting the lbs to kg
-                            exerciseWeight = lbToKg * Double.parseDouble(weightExercise.getText());
-                        }
-                        if (exerciseWeight <= 0) {
-                            extractedFail("Please Enter A Positive Weight Goal");
+                        if (weightExercise.getText().equals("")) {
+                            extractedFail("Please Enter A Weight Goal");
                         } else {
-                            exerciseWeight = Double.parseDouble(String.format("%.1f", exerciseWeight));
-                            //Getting the user choice
-                            String choice = exerciseChoice.getValue();
-                            //Getting the speed of exercise
-                            String speed = choiceOfSpeed.getValue();
-                            //Checking if that user exists or not
-                            if (keyCheck) {
-                                //Getting the user info associated with the user number
-                                user = (User) userInfo.get(name);
-                                //weight = user.getUserWeight();
-                                //Getting the weight difference.
-                                double weightDifference = weight - exerciseWeight;
-                                //If the weight difference is 0
-                                if (weightDifference < 0) {
-                                    leftStatus.setText("");
-                                    rightStatus.setText("");
-                                    viewDetails.setText("Just Eat More.");
+                            try {
+                                //If the option chosen is kilograms
+                                double exerciseWeight;
+                                if (exerciseKGLB.getValue().equals("KG")) {
+                                    exerciseWeight = Double.parseDouble(weightExercise.getText());
                                 }
-                                //If the weight difference is negative.
-                                else if (weightDifference == 0) {
-                                    leftStatus.setText("");
-                                    rightStatus.setText("");
-                                    viewDetails.setText("You are already at this weight");
+                                //If the option chosen is anything else
+                                else {
+                                    //Converting the lbs to kg
+                                    exerciseWeight = lbToKg * Double.parseDouble(weightExercise.getText());
+                                }
+                                if (exerciseWeight <= 0) {
+                                    extractedFail("Please Enter A Positive Weight Goal");
                                 } else {
-
-                                    //Calling the estimate calories option method
-                                    double calories = Calculations.estimateCalories(weightDifference);
-
-                                    //Calling the exercise option method
-                                    String exercise = Calculations.estimateExercise(speed, choice, calories, weight, weightDifference, exerciseWeight);
-                                    viewDetails.setText(exercise);
-                                    rightStatus.setText("Requested info shown!");
-                                    extractedSuccess();
+                                    exerciseWeight = Double.parseDouble(String.format("%.1f", exerciseWeight));
+                                    //Getting the user choice
+                                    String choice = exerciseChoice.getValue();
+                                    //Getting the speed of exercise
+                                    String speed = choiceOfSpeed.getValue();
+                                    //Getting the user info associated with the user number
+                                    user = (User) userInfo.get(name);
+                                    weight = user.getWeight();
+                                    //Getting the weight difference.
+                                    double weightDifference = weight - exerciseWeight;
+                                    //If the weight difference is 0
+                                    if (weightDifference < 0) {
+                                        leftStatus.setText("");
+                                        rightStatus.setText("");
+                                        detailsController.viewDetails.setText("Just Eat More.");
+                                        Stage stage = new Stage();
+                                        stage.setScene(new Scene(root));
+                                        stage.setResizable(false);
+                                        stage.setTitle("User Information");
+                                        stage.show();
+                                        rightStatus.setText("Requested info shown!");
+                                        extractedSuccess();
+                                    }
+                                    //If the weight difference is negative.
+                                    else if (weightDifference == 0) {
+                                        leftStatus.setText("");
+                                        rightStatus.setText("");
+                                        detailsController.viewDetails.setText("You are already at this weight");
+                                        Stage stage = new Stage();
+                                        stage.setScene(new Scene(root));
+                                        stage.setResizable(false);
+                                        stage.setTitle("User Information");
+                                        stage.show();
+                                        rightStatus.setText("Requested info shown!");
+                                        extractedSuccess();
+                                    } else {
+                                        //Calling the estimate calories option method
+                                        double calories = Calculations.estimateCalories(weightDifference);
+                                        //Calling the exercise option method
+                                        String exercise = Calculations.estimateExercise(speed, choice, calories, weight, weightDifference, exerciseWeight);
+                                        detailsController.viewDetails.setText(exercise);
+                                        Stage stage = new Stage();
+                                        stage.setScene(new Scene(root));
+                                        stage.setResizable(false);
+                                        stage.setTitle("User Information");
+                                        stage.show();
+                                        rightStatus.setText("Requested info shown!");
+                                        extractedSuccess();
+                                    }
                                 }
-                            } else {
-                                extractedFail("No user Information found! Add user or Load From File");
+                            } catch (Exception e) {
+                                extractedFail("Enter A positive number for weight goal");
                             }
                         }
                     } catch (Exception e) {
@@ -610,10 +612,10 @@ public class MainController {
                     }
                 }
             } catch (Exception e) {
-                extractedFail("Enter A positive number for weight goal");
+                extractedFail("Please Select An User");
             }
         } catch (Exception e) {
-            extractedFail("No user Information found! Add user or Load From File");
+            extractedFail("Please Select An User");
         }
     }
 
@@ -621,50 +623,55 @@ public class MainController {
      * Allows the user to check their BMI
      */
     @FXML
-    void viewBMI() {
+    void viewBMI() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BmiView.fxml"));
+        Parent root = loader.load();
+        DetailsController detailsController = loader.getController();
         try {
-            //Getting the user number
+            //Getting the username
             name = viewUser.getValue();
-            //Checking if that user exists or not
-            keyCheck = userInfo.containsKey(name);
-            //If the option chosen is view Bmi
-            if (viewInfoType.getValue().equals("View BMI")) {
-                //If the user exists
-                if (keyCheck) {
+            if (Objects.equals(name, "None") || Objects.equals(name, "Select") || (userInfo == null)) {
+                extractedFail("Please Select an user");
+            } else {
+                if (viewInfoType.getValue().equals("View BMI")) {
                     //Gets the user information to view information
                     user = (User) userInfo.get(name);
-                    // weight = user.getUserWeight();
-//                    height = user.getUserHeight();
-
-                    viewDetails.setText(name + "’s " + "BMI is " + Calculations.bmi(weight, height) + ".");
-
+                    weight = user.getWeight();
+                    height = user.getHeight();
+                    detailsController.viewDetails.setText(name + " 's BMI is " + Calculations.bmi(weight, height) + ".");
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.setResizable(false);
+                    stage.setTitle("User Information");
+                    stage.show();
+                    //viewDetails.setText(name + " is " + Calculations.bmiCompare(weight, height) + ".");
                     rightStatus.setText("Requested info shown!");
                     extractedSuccess();
-                } else {
-                    extractedFail("No user Information found! Add user or Load From File");
                 }
-            }
-            //If the option chosen is weight status
-            else {
-                //If the user exists
-                if (keyCheck) {
+                //If the option chosen is weight status
+                else {
                     //Gets the user information to view information
                     user = (User) userInfo.get(name);
-                    //    weight = user.getUserWeight();
-                    //  height = user.getUserHeight();
-
-                    viewDetails.setText(name + " is " + Calculations.bmiCompare(weight, height) + ".");
-
+                    weight = user.getWeight();
+                    height = user.getHeight();
+                    detailsController.viewDetails.setText(name + " is " + Calculations.bmiCompare(weight, height) + ".");
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.setResizable(false);
+                    stage.setTitle("BMI Information");
+                    stage.show();
+                    //viewDetails.setText(name + " is " + Calculations.bmiCompare(weight, height) + ".");
                     rightStatus.setText("Requested info shown!");
                     extractedSuccess();
-                } else {
-                    extractedFail("No user Information found! Add user or Load From File");
                 }
+
             }
+            //Exception handled
         } catch (Exception e) {
-            extractedFail("No user Information found! Add user or Load From File");
+            extractedFail("Please Select an user");
         }
     }
+
     /**
      * Allows the user to load a file and get user information from that file
      */
@@ -722,30 +729,30 @@ public class MainController {
                 if (fileSave.exists() && fileSave.canWrite()) {
                     try {
                         //Looping through the hashmap to get the information of all the user and then writing them to the file
-//                        for (String i : userInfo.keySet()) {
-//                            user = (User) userInfo.get(i);
-//                            //Assigning the info to the variables
-//                        //    name = user.getUserName();
-//                       //     String age = String.valueOf(user.getUserAge());
-//                            //Abbreviating the gender to write to a file
-//
-//                       //     if (user.getUserGender().equals("Male")) {
-//                                gender = "M";
-//                            }
-//                            if (user.getUserGender().equals("Female")) {
-//                                gender = "F";
-//                            }
-//                            if (user.getUserGender().equals("Preferred not to say")) {
-//                                gender = "N";
-//                            }
-//                            String weight = String.valueOf(user.getUserWeight());
-//                            String height = String.valueOf(user.getUserHeight());
-//                            //Writing them to the file.
-//                            Writer.fileWriter(fileSave, name, age, gender, weight, height);
-//                        }
+                        for (String i : userInfo.keySet()) {
+                            user = (User) userInfo.get(i);
+                            //Assigning the info to the variables
+                            name = user.getName();
+                            String age = String.valueOf(user.getAge());
+                            String gender = "";
+                            //Abbreviating the gender to write to a file
+
+                            if (user.getGender().equals("Male")) {
+                                gender = "M";
+                            }
+                            if (user.getGender().equals("Female")) {
+                                gender = "F";
+                            }
+                            if (user.getGender().equals("Preferred not to say")) {
+                                gender = "N";
+                            }
+                            String weight = String.valueOf(user.getWeight());
+                            String height = String.valueOf(user.getHeight());
+                            //Writing them to the file.
+                            Writer.fileWriter(fileSave, name, age, gender, weight, height);
+                        }
                         rightStatus.setText("File Saved");
                         extractedSuccess();
-                        viewDetails.setText("");
                     } catch (Exception e) {
                         //The Error message
                         extractedFail("Error: Could not write to file");
@@ -753,9 +760,11 @@ public class MainController {
                 }
             }
             //Catching exception
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             extractedFail("Add Users First");
         }
+
     }
 
     /**
@@ -768,11 +777,13 @@ public class MainController {
         alert.setTitle("About");
         alert.setHeaderText("About Authors");
         alert.setContentText("""
-                This is fitness tracking program.
+                This is basic health information tracking program.
+                Uses Hashmaps to store user information and display them.
                 Version: 3
                                
                 Amasil Rahim Zihad
                 Email: amasilrahim.zihad@ucalgary.ca
+                Email: amasilrahimzihad@gmail.com
                 """);
         //Showing the alert
         alert.showAndWait();

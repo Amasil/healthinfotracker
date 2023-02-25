@@ -36,7 +36,7 @@
         </MenuBar>
         <SplitPane dividerPositions="0.33797327394209353" focusTraversable="true" prefHeight="600.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
             <items>
-                <AnchorPane maxWidth="-Infinity" prefHeight="600.0" prefWidth="350.0">
+                <AnchorPane maxWidth="-Infinity" prefHeight="600.0" prefWidth="250.0">
                     <children>
                         <Label alignment="CENTER" layoutY="15.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Input" textAlignment="CENTER" wrapText="false">
                             <font>
@@ -52,13 +52,13 @@
                         <TextField fx:id="userAge" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" />
                         <Label layoutX="10.0" layoutY="115.0" text="Gender" />
                         <Label layoutX="10.0" layoutY="145.0" text="Weight" />
-                        <TextField fx:id="userWeight" layoutX="65.0" layoutY="140.0" prefHeight="25.0" prefWidth="70.0" />
-                        <TextField fx:id="userHeight" layoutX="65.0" layoutY="170.0" prefHeight="25.0" prefWidth="70.0" />
+                        <TextField fx:id="userWeight" layoutX="65.0" layoutY="140.0" prefHeight="25.0" prefWidth="50.0" />
+                        <TextField fx:id="userHeight" layoutX="65.0" layoutY="170.0" prefHeight="25.0" prefWidth="50.0" />
                         <Label layoutX="10.0" layoutY="175.0" text="Height" />
-                        <Button layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#createUser" prefWidth="70.0" text="Add User" />
+                        <Button layoutX="65.0" layoutY="205.0" mnemonicParsing="false" onAction="#createUser" prefWidth="150.0" text="Add User" />
                         <ComboBox fx:id="userGender" layoutX="65.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0" />
-                        <ComboBox fx:id="weightChoice" layoutX="145.0" layoutY="140.0" prefWidth="70.0" />
-                        <ComboBox fx:id="heightChoice" layoutX="145.0" layoutY="170.0" prefWidth="70.0" />
+                        <ComboBox fx:id="weightChoice" layoutX="125.0" layoutY="140.0" prefWidth="90.0" />
+                        <ComboBox fx:id="heightChoice" layoutX="125.0" layoutY="171.0" prefWidth="90.0" />
                         <ComboBox fx:id="changeUser" layoutX="105.0" layoutY="275.0" prefWidth="110.0" />
                         <Label layoutX="10.0" layoutY="250.0" minWidth="60.0" text="Change Information" textFill="#9f9f9f">
                             <font>
@@ -74,18 +74,15 @@
                         <Label layoutX="10.0" layoutY="430.0" text="Height" />
                         <TextField fx:id="userAgeChange" layoutX="65.0" layoutY="335.0" prefHeight="25.0" prefWidth="150.0" />
                         <ComboBox fx:id="userGenderChange" layoutX="65.0" layoutY="365.0" prefHeight="25.0" prefWidth="150.0" />
-                        <TextField fx:id="userWeightChange" layoutX="65.0" layoutY="395.0" prefHeight="25.0" prefWidth="70.0" />
-                        <TextField fx:id="userHeightChange" layoutX="65.0" layoutY="425.0" prefHeight="25.0" prefWidth="70.0" />
-                        <ComboBox fx:id="weightChoiceChange" layoutX="145.0" layoutY="395.0" prefWidth="70.0" />
-                        <ComboBox fx:id="heightChoiceChange" layoutX="145.0" layoutY="425.0" prefWidth="70.0" />
-                        <Button layoutX="220.0" layoutY="305.0" mnemonicParsing="false" onAction="#changeName" prefWidth="120.0" text="Change Name" />
-                        <Button layoutX="220.0" layoutY="335.0" mnemonicParsing="false" onAction="#changeAge" prefWidth="120.0" text="Change Age" />
-                        <Button layoutX="220.0" layoutY="365.0" mnemonicParsing="false" onAction="#changeGender" prefWidth="120.0" text="Change Gender" />
-                        <Button layoutX="220.0" layoutY="395.0" mnemonicParsing="false" onAction="#changeWeight" prefWidth="120.0" text="Change Weight" />
-                        <Button layoutX="220.0" layoutY="425.0" mnemonicParsing="false" onAction="#changeHeight" prefWidth="120.0" text="Change Height" />
+                        <TextField fx:id="userWeightChange" layoutX="65.0" layoutY="395.0" prefHeight="25.0" prefWidth="50.0" />
+                        <TextField fx:id="userHeightChange" layoutX="65.0" layoutY="425.0" prefHeight="25.0" prefWidth="50.0" />
+                        <ComboBox fx:id="weightChoiceChange" layoutX="125.0" layoutY="395.0" prefWidth="90.0" />
+                        <ComboBox fx:id="heightChoiceChange" layoutX="125.0" layoutY="425.0" prefWidth="90.0" />
+                  <ComboBox fx:id="changeOptions" layoutX="10.0" layoutY="460.0" prefWidth="125.0" />
+                  <Button layoutX="145.0" layoutY="460.0" mnemonicParsing="false" onAction="#changeTrigger" prefWidth="70.0" text="Change" />
                     </children>
                 </AnchorPane>
-                <AnchorPane maxWidth="-Infinity" prefHeight="600.0" prefWidth="350.0">
+                <AnchorPane maxWidth="-Infinity" prefHeight="550.0" prefWidth="300.0">
                     <children>
                         <Label layoutX="10.0" layoutY="15.0" minWidth="60.0" text="Menu" textFill="#9f9f9f">
                             <font>

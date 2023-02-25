@@ -1,3 +1,8 @@
+/**
+ * A health information tracking program
+ * Amasil Rahim Zihad
+ * Code heavily adapted from my university project done with Fabiha Fairuzz Subha.
+ */
 package mvh.app;
 
 public class Launcher {

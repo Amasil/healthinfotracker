@@ -1,8 +1,7 @@
 /**
  * A health information tracking program
- * *Members:
- * Fabiha Fairuzz Subha
  * Amasil Rahim Zihad
+ * Code heavily adapted from my university project done with Fabiha Fairuzz Subha.
  */
 package mvh.user;
 
