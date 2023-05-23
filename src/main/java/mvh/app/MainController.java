@@ -624,7 +624,7 @@ public class MainController {
      */
     @FXML
     void viewBMI() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BmiView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewDetails.fxml"));
         Parent root = loader.load();
         DetailsController detailsController = loader.getController();
         try {
