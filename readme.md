@@ -1,7 +1,5 @@
 # Author: Amasil Rahim Zihad 
 
-#### Code heavily adapted from my university project done with Fabiha Fairuzz Subha.
-
 ## Version: 3
 
 ### This is a health information tracking program that allows the user to input their information and get back various results from that
